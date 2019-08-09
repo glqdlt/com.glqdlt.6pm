@@ -10,5 +10,7 @@ import java.util.List;
 public interface BoardReply<T extends Reply> {
     void setReplies(List<T> replies);
 
+    void addReply(Reply reply);
+
     List<T> getReplies();
 }
