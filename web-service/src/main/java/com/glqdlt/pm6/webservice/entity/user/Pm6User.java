@@ -1,8 +1,6 @@
 package com.glqdlt.pm6.webservice.entity.user;
 
-import com.glqdlt.pm6.webservice.entity.point.UserPoint;
-
-import java.util.List;
+import java.time.LocalDateTime;
 
 /**
  * Date 2019-08-04
@@ -10,5 +8,11 @@ import java.util.List;
  * @author glqdlt
  */
 public class Pm6User extends User {
-    
+    private Integer level;
+    private Long point;
+    private Long exp;
+    private LocalDateTime joinDate;
+    private String nickname;
+    private Boolean lock;
+    private String thumbnail;
 }
