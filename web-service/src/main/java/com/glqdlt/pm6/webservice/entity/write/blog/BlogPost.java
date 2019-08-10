@@ -3,6 +3,7 @@ package com.glqdlt.pm6.webservice.entity.write.blog;
 import com.glqdlt.pm6.webservice.entity.write.BoardReply;
 import com.glqdlt.pm6.webservice.entity.write.UploadPost;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -13,9 +14,18 @@ import java.util.List;
 public class BlogPost extends UploadPost implements BoardReply<BlogReply> {
     private List<BlogReply> replies;
 
+    {
+        replies = new LinkedList<>();
+    }
+
     @Override
     public void setReplies(List<BlogReply> replies) {
         this.replies = replies;
+    }
+
+    @Override
+    public void addReply(BlogReply reply) {
+        replies.add(reply);
     }
 
     @Override
