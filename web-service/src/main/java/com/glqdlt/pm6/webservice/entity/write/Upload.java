@@ -1,5 +1,7 @@
 package com.glqdlt.pm6.webservice.entity.write;
 
+import java.time.LocalDateTime;
+
 /**
  * Date 2019-08-04
  *
@@ -10,6 +12,24 @@ public abstract class Upload {
     private Long id;
     private String name;
     private String path;
+    private String hash;
+    private LocalDateTime regDate;
+
+    public LocalDateTime getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(LocalDateTime regDate) {
+        this.regDate = regDate;
+    }
+
+    public String getHash() {
+        return hash;
+    }
+
+    public void setHash(String hash) {
+        this.hash = hash;
+    }
 
     public Long getId() {
         return id;
@@ -35,9 +55,17 @@ public abstract class Upload {
         this.path = path;
     }
 
-    public abstract UploadType getType();
+    public abstract com.glqdlt.pm6.webservice.entity.upload.Upload.UploadType getType();
 
-    public static class File extends Upload {
+    public static class LinkUpload extends Upload{
+
+        @Override
+        public com.glqdlt.pm6.webservice.entity.upload.Upload.UploadType getType() {
+            return com.glqdlt.pm6.webservice.entity.upload.Upload.UploadType.LINK;
+        }
+    }
+
+    public static class StorageArchive extends Upload {
         private String extension;
 
         public String getExtension() {
@@ -49,13 +77,17 @@ public abstract class Upload {
         }
 
         @Override
-        public UploadType getType() {
-            return UploadType.FILE;
+        public com.glqdlt.pm6.webservice.entity.upload.Upload.UploadType getType() {
+            return com.glqdlt.pm6.webservice.entity.upload.Upload.UploadType.STORAGE_ARCHIVE;
         }
     }
 
-    public static class Image extends Upload {
+    public static class EmbeddedThumbnail extends Upload {
         private String imageFormat;
+
+        public String getData() {
+            return getPath();
+        }
 
         public String getImageFormat() {
             return imageFormat;
@@ -66,8 +98,9 @@ public abstract class Upload {
         }
 
         @Override
-        public UploadType getType() {
-            return UploadType.IMAGE;
+        public com.glqdlt.pm6.webservice.entity.upload.Upload.UploadType getType() {
+            return com.glqdlt.pm6.webservice.entity.upload.Upload.UploadType.DATABASE_EMBEDDED;
         }
     }
+
 }
