@@ -14,5 +14,45 @@ public class Write {
     private String text;
     private LocalDateTime regDate;
     private Boolean viewable;
-    private User author;
+    private User writer;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public LocalDateTime getRegDate() {
+        return regDate;
+    }
+
+    public void setRegDate(LocalDateTime regDate) {
+        this.regDate = regDate;
+    }
+
+    public Boolean getViewable() {
+        return viewable;
+    }
+
+    public void setViewable(Boolean viewable) {
+        this.viewable = viewable;
+    }
+
+    public User getWriter() {
+        return writer;
+    }
+
+    public void setWriter(User writer) {
+        this.writer = writer;
+    }
 }
