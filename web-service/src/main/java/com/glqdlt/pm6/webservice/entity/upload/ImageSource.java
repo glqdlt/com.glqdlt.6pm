@@ -5,6 +5,7 @@ package com.glqdlt.pm6.webservice.entity.upload;
  *
  * @author glqdlt
  */
-public interface DataBaseEmbeddedFile {
-    String getEmbeddedData();
+public interface ImageSource {
+    String getImageSource();
+    Integer getImageSourceType();
 }

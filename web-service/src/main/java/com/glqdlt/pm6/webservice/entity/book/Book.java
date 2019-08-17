@@ -1,5 +1,7 @@
 package com.glqdlt.pm6.webservice.entity.book;
 
+import com.glqdlt.pm6.webservice.entity.upload.ThumbnailImage;
+
 import java.time.LocalDateTime;
 
 /**
@@ -12,4 +14,5 @@ public class Book {
     private String title;
     private Author author;
     private LocalDateTime regDate;
+    private ThumbnailImage thumbnailImage;
 }

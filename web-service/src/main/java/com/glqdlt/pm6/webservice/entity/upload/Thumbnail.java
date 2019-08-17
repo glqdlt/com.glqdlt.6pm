@@ -5,6 +5,5 @@ package com.glqdlt.pm6.webservice.entity.upload;
  *
  * @author glqdlt
  */
-public interface ThumbnailImageSource {
-    String getImageSource();
+public interface Thumbnail {
 }

@@ -5,26 +5,31 @@ package com.glqdlt.pm6.webservice.entity.upload;
  *
  * @author glqdlt
  */
-public class LinkThumbnailImage extends ThumbnailImage implements Link {
+public class LinkThumbnailImage implements LinkThumbnail {
+    private Long id;
+
     private String url;
-    public static final Integer LinkThumbnailImageType = 0;
 
     @Override
-    public String getImageSource() {
-        return getLinkUrl();
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     @Override
     public String getLinkUrl() {
-        return this.url;
+        return getUrl();
     }
 
     public void setUrl(String url) {
         this.url = url;
     }
 
-    @Override
-    public Integer getThumbnailType() {
-        return LinkThumbnailImageType;
-    }
 }

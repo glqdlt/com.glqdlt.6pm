@@ -5,28 +5,58 @@ package com.glqdlt.pm6.webservice.entity.upload;
  *
  * @author glqdlt
  */
-public class EmbeddedThumbnailImage extends FileThumbnailImage implements DataBaseEmbeddedFile {
+public abstract class EmbeddedThumbnailImage implements DataBaseEmbeddedFile, ImageFile, StreamThumbnail {
     public static final Integer EmbeddedThumbnailImageType = 1;
-//    LongText
-//    @Lob
-    private String data;
+    private String imageExtension;
+    private String embeddedData;
+    private String name;
+    private Long id;
 
-    public void setData(String data) {
-        this.data = data;
+    public void setImageExtension(String imageExtension) {
+        this.imageExtension = imageExtension;
+    }
+
+    public void setName(String name) {
+        isImageFile(name);
+        this.name = name;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setEmbeddedData(String embeddedData) {
+        this.embeddedData = embeddedData;
     }
 
     @Override
     public String getImageSource() {
-        return String.format("data:image/%s;base64, %s", getImageType().toLowerCase(), getData());
+        return String.format("data:image/%s;base64, %s", getImageType().toLowerCase(), getEmbeddedData());
     }
 
     @Override
-    public String getData() {
-        return data;
-    }
-
-    @Override
-    public Integer getThumbnailType() {
+    public Integer getImageSourceType() {
         return EmbeddedThumbnailImageType;
     }
+
+    @Override
+    public String getEmbeddedData() {
+        return embeddedData;
+    }
+
+    @Override
+    public String getImageExtension() {
+        return imageExtension;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
 }
