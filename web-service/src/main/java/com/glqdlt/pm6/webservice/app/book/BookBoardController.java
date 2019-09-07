@@ -1,7 +1,9 @@
 package com.glqdlt.pm6.webservice.app.book;
 
+import com.glqdlt.pm6.model.article.BookArticle;
 import com.glqdlt.pm6.model.bbs.BoardContents;
 import com.glqdlt.pm6.model.bbs.BookBoardContents;
+import com.glqdlt.pm6.model.book.Bookable;
 import com.glqdlt.pm6.model.paging.BoardPageable;
 import com.glqdlt.pm6.webservice.app.DetailBoardAble;
 import com.glqdlt.pm6.webservice.app.SearchBoardAble;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("/book")
-public class BookBoardController implements SearchBoardAble<BookBoardContents>, DetailBoardAble {
+public class BookBoardController implements SearchBoardAble<BookBoardContents>, DetailBoardAble<BookArticle> {
 
     /**
      * 참고) JDK8 기준으로 static 도 heap area 로 넘어갔기 때문에, static 이 의미가 없어서 아래처럼 했음. 참고
@@ -40,7 +42,7 @@ public class BookBoardController implements SearchBoardAble<BookBoardContents>, 
     }
 
     @Override
-    public BoardContents pillDetailContents(Integer id) {
+    public BookArticle pillDetailContents(Integer id) {
         return null;
     }
 

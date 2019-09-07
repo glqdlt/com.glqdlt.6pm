@@ -2,7 +2,9 @@ package com.glqdlt.pm6.model.article;
 
 import com.glqdlt.pm6.model.author.Author;
 import com.glqdlt.pm6.model.book.Bookable;
+import com.glqdlt.pm6.model.write.Writeable;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,7 +14,7 @@ import java.util.stream.Collectors;
  *
  * @author glqdlt
  */
-public class BookArticle implements Bookable {
+public class BookArticle implements Bookable, Writeable {
     private Author[] authors;
 
     @Override
@@ -34,5 +36,30 @@ public class BookArticle implements Bookable {
 
     public void setAuthors(Author[] authors) {
         this.authors = authors;
+    }
+
+    @Override
+    public Long getWriteId() {
+        return null;
+    }
+
+    @Override
+    public String getWriteSubject() {
+        return null;
+    }
+
+    @Override
+    public String getWriteContents() {
+        return null;
+    }
+
+    @Override
+    public LocalDateTime getWriteRegDate() {
+        return null;
+    }
+
+    @Override
+    public String getWriter() {
+        return null;
     }
 }

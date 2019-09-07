@@ -1,6 +1,7 @@
 package com.glqdlt.pm6.webservice.app;
 
 import com.glqdlt.pm6.model.bbs.BoardContents;
+import com.glqdlt.pm6.model.write.Writeable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ import static com.glqdlt.pm6.webservice.app.SearchBoardAble.MODEL_ATTRIBUTE_KEY;
  *
  * @author glqdlt
  */
-public interface DetailBoardAble<T extends BoardContents> extends WrongParamHandler {
+public interface DetailBoardAble<T extends Writeable> extends WrongParamHandler {
     String getDetailBoardView();
 
     T pillDetailContents(Integer id);
