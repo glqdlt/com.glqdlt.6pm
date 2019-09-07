@@ -1,6 +1,6 @@
 package com.glqdlt.pm6.entity.write;
 
-import com.glqdlt.pm6.entity.user.User;
+import com.glqdlt.pm6.model.user.User;
 
 import java.time.LocalDateTime;
 
