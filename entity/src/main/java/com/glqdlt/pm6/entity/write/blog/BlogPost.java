@@ -1,6 +1,5 @@
 package com.glqdlt.pm6.entity.write.blog;
 
-import com.glqdlt.pm6.entity.write.BoardReply;
 import com.glqdlt.pm6.entity.write.UploadPost;
 
 import java.util.LinkedList;
@@ -11,6 +10,7 @@ import java.util.List;
  *
  * @author glqdlt
  */
+@Deprecated
 public class BlogPost extends UploadPost implements BoardReply<BlogReply> {
     private List<BlogReply> replies;
 

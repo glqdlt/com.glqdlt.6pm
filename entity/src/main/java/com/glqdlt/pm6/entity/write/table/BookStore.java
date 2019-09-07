@@ -7,6 +7,7 @@ import com.glqdlt.pm6.entity.book.Pm6Book;
  *
  * @author glqdlt
  */
+@Deprecated
 public class BookStore extends DataTable {
     private Pm6Book book;
 

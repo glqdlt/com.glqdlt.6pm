@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.entity.write;
+package com.glqdlt.pm6.entity.write.blog;
 
 import java.time.LocalDateTime;
 
@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
  *
  * @author glqdlt
  */
+@Deprecated
 public class Board {
     private String name;
     private LocalDateTime createdTime;

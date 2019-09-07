@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.entity.write;
+package com.glqdlt.pm6.entity.write.blog;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import java.util.List;
  *
  * @author glqdlt
  */
+@Deprecated
 public interface BoardReply<T extends Reply> {
     void setReplies(List<T> replies);
 
