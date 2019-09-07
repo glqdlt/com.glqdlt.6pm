@@ -20,6 +20,8 @@
     <modules>
         <module>web-cms</module>
         <module>web-service</module>
+        <module>model</module>
+        <module>entity</module>
     </modules>
 
 </project>
