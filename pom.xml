@@ -22,6 +22,7 @@
         <module>web-service</module>
         <module>model</module>
         <module>entity</module>
+        <module>thumbnail-extract</module>
     </modules>
 
 </project>
