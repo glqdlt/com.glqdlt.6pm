@@ -19,8 +19,8 @@ public class ThumbnailExtract extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(ClassLoader.getSystemResource("sample.fxml"));
-        stage.setTitle("Hello World");
-        stage.setScene(new Scene(root, 300, 275));
+        stage.setTitle("썸네일 추출기");
+        stage.setScene(new Scene(root, 1600, 900));
         stage.show();
     }
 }
