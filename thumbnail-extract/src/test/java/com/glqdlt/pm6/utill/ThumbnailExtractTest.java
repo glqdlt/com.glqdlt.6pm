@@ -17,7 +17,7 @@ public class ThumbnailExtractTest {
 
     @Test
     public void zip() {
-        File file = new File("E:\\glqdlt\\DeskTop\\새 폴더 (3)");
+        File file = new File("E:\\glqdlt\\DeskTop\\zzzzzz\\aa");
         ExecutorService executorService = Executors.newFixedThreadPool(8);
         List<Future> l = new ArrayList<>();
         if (file.isDirectory()) {
