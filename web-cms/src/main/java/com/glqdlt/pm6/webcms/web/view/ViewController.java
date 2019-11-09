@@ -15,4 +15,8 @@ public class ViewController {
     public String root() {
         return "root";
     }
+    @GetMapping("/book/new")
+    public String getBook(){
+        return "book-input-form";
+    }
 }
