@@ -67,7 +67,7 @@ public class NotSupportedIEFilter implements Filter {
             String optionalUserAgent = httpServletRequest.getHeader(getHeaderUserAgent());
             if (optionalUserAgent != null) {
                 if (optionalUserAgent.contains(MS_ENGINE)) {
-                    logger.debug("user browser is internet explorer");
+                    logger.warn("Waring : User Agent is {}, It's maybe IE Browser.", MS_ENGINE);
                     ((HttpServletResponse) response).sendRedirect(getRedirectPath());
                     return;
                 }
