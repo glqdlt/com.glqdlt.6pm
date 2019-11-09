@@ -1,6 +1,6 @@
 package com.glqdlt.pm6.webcms.config;
 
-import com.glqdlt.pm6.webcms.web.filter.NotSupportedIEFilter;
+import com.glqdlt.pm6.webcms.web.view.filter.NotSupportedIEFilter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static com.glqdlt.pm6.webcms.config.FilterConfig.API_PATH_PREFIX_PATTERN;
-import static com.glqdlt.pm6.webcms.web.view.ViewController.NOT_SUPPORTED_IE_PATH;
+import static com.glqdlt.pm6.webcms.web.view.ErrorController.NOT_SUPPORTED_IE_PATH;
 
 /**
  * @author glqdlt
@@ -39,7 +39,8 @@ public class NotSupportedIEFilterTest {
     @Test
     public void redirectNotSupportedIe() throws Exception {
         MockMvc mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
-                .addFilter(new NotSupportedIEFilter(NOT_SUPPORTED_IE_PATH, API_PATH_PREFIX_PATTERN))
+                .addFilter(new NotSupportedIEFilter(NOT_SUPPORTED_IE_PATH,
+                        API_PATH_PREFIX_PATTERN))
                 .build();
         MvcResult r = mockMvc.perform(MockMvcRequestBuilders.get("/").header("User-Agent",
                 "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko"))

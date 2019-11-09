@@ -24,7 +24,6 @@ import java.util.Optional;
 public class RestfulAppender extends AppenderBase<ILoggingEvent> {
 
     private final RestTemplateBuilder builder;
-    private Integer poolSize;
     private String webhookUrl;
     private String emoji;
 
@@ -38,14 +37,6 @@ public class RestfulAppender extends AppenderBase<ILoggingEvent> {
 
     public void setWebhookUrl(String webhookUrl) {
         this.webhookUrl = webhookUrl;
-    }
-
-    public Integer getPoolSize() {
-        return poolSize;
-    }
-
-    public void setPoolSize(Integer poolSize) {
-        this.poolSize = poolSize;
     }
 
     public RestfulAppender() {

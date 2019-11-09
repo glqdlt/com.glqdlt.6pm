@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.webcms.web.api;
+package com.glqdlt.pm6.webcms.web.restful;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 @RestController
 public class SomeRestController {
-    @GetMapping("/")
-    public String aa(){
-        return "hi";
+    /**
+     * gateway 에서 헬스 체크할 때 찌르는 api
+     */
+    @GetMapping("/health")
+    public void getHeartBeat() {
+
     }
 }

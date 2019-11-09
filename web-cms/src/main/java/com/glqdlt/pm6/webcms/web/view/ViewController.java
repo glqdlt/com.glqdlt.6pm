@@ -11,14 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ViewController {
 
-    public static final String NOT_SUPPORTED_IE_PATH = "/error/notSupported";
     @GetMapping("/")
     public String root() {
         return "root";
-    }
-
-    @GetMapping(NOT_SUPPORTED_IE_PATH)
-    public String notSupportedIe() {
-        return "/error/not-supported-ie";
     }
 }

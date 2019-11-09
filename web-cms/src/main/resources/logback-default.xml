@@ -4,12 +4,11 @@
         <!-- encoders are assigned the type
              ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
     <appender name="REST" class="com.glqdlt.pm6.webcms.logging.RestfulAppender">
-        <poolSize>1</poolSize>
         <webhookUrl>https://hooks.slack.com/services/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</webhookUrl>
     </appender>
 

@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.webcms.web.filter;
+package com.glqdlt.pm6.webcms.web.view.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

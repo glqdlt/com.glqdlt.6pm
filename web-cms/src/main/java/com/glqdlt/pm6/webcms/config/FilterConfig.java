@@ -1,11 +1,12 @@
 package com.glqdlt.pm6.webcms.config;
 
-import com.glqdlt.pm6.webcms.web.filter.NotSupportedIEFilter;
+import com.glqdlt.pm6.webcms.web.view.filter.NotSupportedIEFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static com.glqdlt.pm6.webcms.web.view.ViewController.NOT_SUPPORTED_IE_PATH;
+import static com.glqdlt.pm6.webcms.web.view.ErrorController.NOT_SUPPORTED_IE_PATH;
+
 
 /**
  * Date 2019-08-10
