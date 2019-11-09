@@ -18,6 +18,7 @@ import java.util.Optional;
 public class NotSupportedIEFilter implements Filter {
     private final static Logger logger = LoggerFactory.getLogger(NotSupportedIEFilter.class);
     private final static String HEADER_USER_AGENT = "user-agent";
+    private final static String MS_ENGINE = "Trident";
     private final String redirectPath;
     private String excludePathRegex;
 
@@ -46,7 +47,7 @@ public class NotSupportedIEFilter implements Filter {
         this.excludePathRegex = excludePathRegex;
     }
 
-    private boolean requestUriMatch(String requestUri) {
+    private boolean isExcludeUrl(String requestUri) {
 
         if (requestUri.equals(getRedirectPath())) {
             return false;
@@ -61,11 +62,11 @@ public class NotSupportedIEFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = ((HttpServletRequest) request);
-        String requestUri = httpServletRequest.getRequestURI();
-        if (requestUriMatch(requestUri)) {
-            Optional<String> optionalUserAgent = Optional.ofNullable(httpServletRequest.getHeader(getHeaderUserAgent()));
-            if (optionalUserAgent.isPresent()) {
-                if (optionalUserAgent.get().contains("Trident")) {
+        String req = httpServletRequest.getRequestURI();
+        if (isExcludeUrl(req)) {
+            String optionalUserAgent = httpServletRequest.getHeader(getHeaderUserAgent());
+            if (optionalUserAgent != null) {
+                if (optionalUserAgent.contains(MS_ENGINE)) {
                     logger.debug("user browser is internet explorer");
                     ((HttpServletResponse) response).sendRedirect(getRedirectPath());
                     return;
