@@ -528,34 +528,66 @@
                                     <div class="form-group">
                                         <label for="book-title">Title</label>
                                         <input type="text" class="form-control" id="book-title"
-                                               placeholder="Enter title">
+                                               placeholder="example) clean code">
                                     </div>
                                     <div class="form-group">
                                         <label for="book-author">Author</label>
+                                        <p>
+                                            <small>쉼표(,)로 구분해서 작가를 입력합니다.</small>
+                                        </p>
                                         <input type="text" class="form-control" id="book-author"
-                                               placeholder="Enter email">
+                                               placeholder="example) martin, 홍길동, 마틴 오더스키">
                                     </div>
                                     <div class="form-group">
-                                        <label for="book-tag">Tag</label>
+                                        <label for="book-tag">Tag (Option)</label>
+                                        <p>
+                                            <small>쉼표(,)로 구분해서 Tag를 입력합니다.</small>
+                                        </p>
                                         <input type="text" class="form-control" id="book-tag"
-                                               placeholder="Enter email">
+                                               placeholder="example) programing,java,dev,best seller">
                                     </div>
                                     <div class="form-group">
-                                        <label>Textarea</label>
-                                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        <label>Description (Option)</label>
+                                        <p>
+                                            <small>간단한 설명을 남길 수 있습니다.</small>
+                                        </p>
+                                        <textarea class="form-control" rows="3"
+                                                  placeholder="example) My favorite book."></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputFile">Book Upload</label>
+                                        <label for="exampleInputFile">Book Upload (Option)</label>
+                                        <div>
+                                            <p>
+                                                <small>전자책을 업로드 합니다. 지원하는 포맷은 pdf, zip 입니다.</small>
+                                            </p>
+                                        </div>
                                         <input type="file" id="exampleInputFile">
-
                                     </div>
+
                                     <div class="form-group">
                                         <label>Thumbnail</label>
                                         <div class="radio">
                                             <label><input type="radio" name="thumbnailType"
-                                                          value="url"
-                                                          checked>URL</label>
+                                                          value="first" checked>First Page</label>
                                             <label><input type="radio" name="thumbnailType"
+                                                          value="none">None</label>
+                                            <label><input type="radio" name="thumbnailType"
+                                                          value="manual">Manual</label>
+                                        </div>
+                                        <p><small>First Page : 첫번째 장을 썸네일로 자동으로 만들어서 업로드 합니다.</small></p>
+                                        <p><small>None : 썸네일을 사용하지 않습니다.</small></p>
+                                        <p><small>Manual : 썸네일을 직접 업로드 하거나 Url 을 지정합니다.</small></p>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-5">
+
+                                    <div class="form-group">
+                                        <label>Manual Thumbnail</label>
+                                        <div class="radio">
+                                            <label><input type="radio" name="thumbnailManual" checked
+                                                          value="url">URL</label>
+                                            <label><input type="radio" name="thumbnailManual"
                                                           value="upload">Upload</label>
                                         </div>
                                     </div>
@@ -563,15 +595,9 @@
                                         <input type="url" class="form-control">
                                         <input type="file" id="thumbnail">
 
-                                        <p class="help-block">10MB size limit</p>
+                                        <p class="help-block">5MB size limit</p>
                                     </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox"> secret
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-md-5">
+
                                     <img class="col-lg-10 col-md-12 col-xs-12"
                                          src="https://bookthumb-phinf.pstatic.net/cover/107/710/10771065.jpg?udate=20160721">
                                 </div>
