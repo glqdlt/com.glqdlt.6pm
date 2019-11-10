@@ -1,7 +1,7 @@
 package com.glqdlt.pm6.webservice.app;
 
-import com.glqdlt.pm6.model.bbs.BoardContents;
-import com.glqdlt.pm6.model.paging.BoardPageable;
+import com.glqdlt.pm6.api.model.bbs.BoardContents;
+import com.glqdlt.pm6.api.model.paging.BoardPageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

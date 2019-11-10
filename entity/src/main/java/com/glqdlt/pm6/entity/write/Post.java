@@ -1,6 +1,6 @@
 package com.glqdlt.pm6.entity.write;
 
-import com.glqdlt.pm6.model.write.Writeable;
+import com.glqdlt.pm6.api.model.write.Writeable;
 
 /**
  * Date 2019-08-04

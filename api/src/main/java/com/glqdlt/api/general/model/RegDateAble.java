@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.api.model;
+package com.glqdlt.api.general.model;
 
 import java.time.LocalDateTime;
 
@@ -7,6 +7,6 @@ import java.time.LocalDateTime;
  *
  * @author glqdlt
  */
-public interface Pm6able extends UniqueNumber {
+public interface RegDateAble {
     LocalDateTime getRegDate();
 }

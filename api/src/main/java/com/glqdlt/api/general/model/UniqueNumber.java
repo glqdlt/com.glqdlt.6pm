@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.api.model;
+package com.glqdlt.api.general.model;
 
 /**
  * Date 2019-11-10

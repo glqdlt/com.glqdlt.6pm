@@ -17,7 +17,7 @@ public class ViewControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(ViewController.class)
+        this.mockMvc = MockMvcBuilders.standaloneSetup(RootController.class)
                 .build();
     }
 

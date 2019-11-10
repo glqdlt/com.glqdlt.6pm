@@ -1,10 +1,10 @@
 package com.glqdlt.pm6.webservice.app.book;
 
-import com.glqdlt.pm6.model.article.BookArticle;
-import com.glqdlt.pm6.model.bbs.BoardContents;
-import com.glqdlt.pm6.model.bbs.BookBoardContents;
-import com.glqdlt.pm6.model.book.Bookable;
-import com.glqdlt.pm6.model.paging.BoardPageable;
+import com.glqdlt.pm6.api.model.article.BookArticle;
+import com.glqdlt.pm6.api.model.bbs.BoardContents;
+import com.glqdlt.pm6.api.model.bbs.BookBoardContents;
+import com.glqdlt.pm6.api.model.book.Bookable;
+import com.glqdlt.pm6.api.model.paging.BoardPageable;
 import com.glqdlt.pm6.webservice.app.DetailBoardAble;
 import com.glqdlt.pm6.webservice.app.SearchBoardAble;
 import org.slf4j.Logger;
