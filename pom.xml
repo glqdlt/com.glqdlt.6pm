@@ -20,7 +20,7 @@
     <modules>
         <module>web-cms</module>
         <module>web-service</module>
-        <module>model</module>
+        <module>api</module>
         <module>entity</module>
         <module>thumbnail-extract</module>
     </modules>
