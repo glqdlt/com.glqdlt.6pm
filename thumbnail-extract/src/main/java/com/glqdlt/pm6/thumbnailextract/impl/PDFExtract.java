@@ -1,5 +1,7 @@
-package com.glqdlt.pm6.utill;
+package com.glqdlt.pm6.thumbnailextract.impl;
 
+import com.glqdlt.pm6.thumbnailextract.api.ExtractError;
+import com.glqdlt.pm6.thumbnailextract.api.ExtractUtil;
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;

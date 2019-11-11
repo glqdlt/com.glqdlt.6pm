@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.utill;
+package com.glqdlt.pm6.thumbnailextract.api;
 
 /**
  * Date 2019-11-11

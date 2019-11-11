@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.utill;
+package com.glqdlt.pm6.thumbnailextract.api;
 
 import org.slf4j.Logger;
 

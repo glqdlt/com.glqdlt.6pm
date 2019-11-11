@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.utill;
+package com.glqdlt.pm6.thumbnailextract.impl;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,8 +9,8 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-public class PdfExtracterTest {
-    private final Logger logger = LoggerFactory.getLogger(PdfExtracterTest.class);
+public class PdfExtractTest {
+    private final Logger logger = LoggerFactory.getLogger(PdfExtractTest.class);
     @Test
     public void firstPagePdfImageExtract() throws IOException {
         String tempPath = System.getProperty("java.io.tmpdir");

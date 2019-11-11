@@ -1,5 +1,7 @@
-package com.glqdlt.pm6.utill;
+package com.glqdlt.pm6.thumbnailextract.impl;
 
+import com.glqdlt.pm6.thumbnailextract.api.AsyncExtractError;
+import com.glqdlt.pm6.thumbnailextract.api.ExtractUtil;
 import org.slf4j.Logger;
 
 import java.io.File;
