@@ -1,23 +1,16 @@
 package com.glqdlt.pm6.utill;
 
-import org.apache.pdfbox.cos.COSBase;
 import org.apache.pdfbox.cos.COSName;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageTree;
 import org.apache.pdfbox.pdmodel.PDResources;
 import org.apache.pdfbox.pdmodel.graphics.PDXObject;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
-import org.apache.pdfbox.rendering.PDFRenderer;
+import org.slf4j.Logger;
 
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
@@ -32,13 +25,15 @@ import java.util.Random;
  * @author glqdlt
  * @see <a href='https://www.baeldung.com/java-pdf-creation'>https://www.baeldung.com/java-pdf-creation</a>
  */
-public class PdfExtracter implements Extracter {
+public class PDFExtract implements ExtractUtil {
+
+    final private Logger logger;
+
+    public PDFExtract(Logger logger) {
+        this.logger = logger;
+    }
 
     /**
-     * 첫 page 의 엘리먼트를 순회하면서 이미지가 있으면 이를 저장하는 행위이다.
-     * pdf 는 여러 문서 엘리먼트로 만들수있으니깐 이럼..
-     * 내가만든 북스캔 pdf 는 어차피 통 이미지 이기 때문에.. COSName 에서 하나의 엘리먼트 통 이미지만 나올거라.. 문제가 없다.
-     *
      * @param input
      * @param outputDir
      * @return
@@ -46,40 +41,61 @@ public class PdfExtracter implements Extracter {
      */
     @Override
     public String[] extract(File input, File outputDir) throws IOException {
-        if (!outputDir.isDirectory()) {
-            throw new RuntimeException("asdasd");
+        return extract(input, outputDir, null, 0);
+    }
+
+    @Override
+    public Logger getLogger() {
+        return logger;
+    }
+
+    public String[] extract(File inputSource, File outputDir, String fileName) throws IOException {
+        return extract(inputSource, outputDir, fileName, 0);
+    }
+
+    public String[] extract(File inputSource, File outputDir, String fileName, Integer pageNumb) throws IOException {
+        if (outputDir == null || !outputDir.isDirectory()) {
+            throw new ExtractError("Wrong outputDir");
         }
-        PDDocument document = PDDocument.load(input);
-        PDPage firstPage = document.getPage(0);
+        PDDocument document = PDDocument.load(inputSource);
+        PDPage firstPage = document.getPage(pageNumb);
         PDResources pageResources = firstPage.getResources();
         Iterable<COSName> els = pageResources.getXObjectNames();
         List<String> path = new LinkedList<>();
+        int i = 0;
         for (COSName el : els) {
             PDXObject elObj = pageResources.getXObject(el);
             if (elObj instanceof PDImageXObject) {
+                getLogger().debug("find image object");
                 PDImageXObject imageOrigin = ((PDImageXObject) elObj);
-                File f = makeImagePath(outputDir, imageOrigin.getSuffix());
+                File f = makeImagePath(outputDir, fileName, i, imageOrigin.getSuffix());
                 boolean result = ImageIO.write(imageOrigin.getImage(),
                         imageOrigin.getSuffix(),
                         f);
                 if (result) {
+                    getLogger().debug("extract done, image path attach");
                     path.add(f.getCanonicalPath());
                 }
             }
+            i++;
         }
         return path.toArray(new String[0]);
     }
 
-    private File makeImagePath(File dir, String suffix) throws IOException {
-        Random random = new Random();
-        int ran = random.nextInt(99);
-        String target = dir.getCanonicalPath()
-                + File.separator
-                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY_MM_dd_HH_mm_ss_"))
-                + ran
-                + "."
-                + suffix;
-        return new File(target);
+    private File makeImagePath(File dir, String fileName, Integer count, String suffix) throws IOException {
+        final String filePrefix;
+        if (fileName == null || fileName.equals("")) {
+            Random random = new Random();
+            int ran = random.nextInt(99);
+            filePrefix = LocalDateTime.now().format(DateTimeFormatter.ofPattern("YYYY_MM_dd_HH_mm_ss_"))
+                    + ran;
+        } else {
+            filePrefix = fileName.split(".")[0];
+        }
+        final String path = dir.getCanonicalPath()
+                + File.separator;
+
+        return new File(path + filePrefix + "_" + count + "." + suffix);
     }
 
     // 아래는 pdf 를 캡처하는 방식이다.
