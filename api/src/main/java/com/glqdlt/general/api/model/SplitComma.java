@@ -1,4 +1,4 @@
-package com.glqdlt.api.general.model;
+package com.glqdlt.general.api.model;
 
 import java.util.Arrays;
 import java.util.List;

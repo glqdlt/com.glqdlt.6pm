@@ -1,9 +1,9 @@
-package com.glqdlt.pm6.api.model.book.entity;
+package com.glqdlt.pm6.persistence.book.entity;
 
-import com.glqdlt.api.general.model.EntityModel;
-import com.glqdlt.pm6.api.model.author.entity.Pm6AuthorEntityBase;
+import com.glqdlt.general.api.model.EntityModel;
+import com.glqdlt.pm6.persistence.author.entity.Pm6AuthorEntityBase;
 import com.glqdlt.pm6.api.model.book.Pm6Book;
-import com.glqdlt.pm6.api.model.tag.entity.Pm6TagEntityBase;
+import com.glqdlt.pm6.persistence.tag.entity.Pm6TagEntityBase;
 
 import java.time.LocalDateTime;
 
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  *
  * @author glqdlt
  */
-public class Pm6BookEntityBase extends Pm6Book<Pm6TagEntityBase, Pm6AuthorEntityBase> implements EntityModel {
+public class Pm6BookEntityBase <B extends Pm6TagEntityBase, A extends Pm6AuthorEntityBase> extends Pm6Book<B, A> implements EntityModel {
     private LocalDateTime regDate;
     private Long no;
 

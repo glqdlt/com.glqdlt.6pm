@@ -1,7 +1,7 @@
-package com.glqdlt.pm6.api.model.tag.entity;
+package com.glqdlt.pm6.persistence.tag.entity;
 
-import com.glqdlt.api.general.model.EntityModel;
-import com.glqdlt.api.general.model.RegDateAble;
+import com.glqdlt.general.api.model.EntityModel;
+import com.glqdlt.general.api.model.RegDateAble;
 import com.glqdlt.pm6.api.model.tag.TagImpl;
 
 import java.time.LocalDateTime;

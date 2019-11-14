@@ -27,7 +27,6 @@
     <modules>
         <module>web-cms</module>
         <module>api</module>
-        <module>thumbnail-extract</module>
     </modules>
 
 </project>

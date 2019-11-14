@@ -1,6 +1,6 @@
 package com.glqdlt.pm6.api.model.user;
 
-import com.glqdlt.api.general.model.EntityModel;
+import com.glqdlt.general.api.model.EntityModel;
 
 /**
  * Date 2019-11-10

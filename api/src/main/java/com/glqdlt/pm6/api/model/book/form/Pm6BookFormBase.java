@@ -1,6 +1,6 @@
 package com.glqdlt.pm6.api.model.book.form;
 
-import com.glqdlt.api.general.model.FormModel;
+import com.glqdlt.general.api.model.FormModel;
 import com.glqdlt.pm6.api.model.author.form.AuthorFormBase;
 import com.glqdlt.pm6.api.model.book.Pm6Book;
 import com.glqdlt.pm6.api.model.tag.form.Pm6TagFormBase;

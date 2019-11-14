@@ -1,6 +1,6 @@
-package com.glqdlt.pm6.api.model.author.entity;
+package com.glqdlt.pm6.persistence.author.entity;
 
-import com.glqdlt.api.general.model.EntityModel;
+import com.glqdlt.general.api.model.EntityModel;
 import com.glqdlt.pm6.api.model.author.AuthorImpl;
 
 import java.time.LocalDateTime;

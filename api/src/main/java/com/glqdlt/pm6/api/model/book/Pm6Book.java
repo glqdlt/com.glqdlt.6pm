@@ -1,6 +1,6 @@
 package com.glqdlt.pm6.api.model.book;
 
-import com.glqdlt.api.general.model.Description;
+import com.glqdlt.general.api.model.Description;
 import com.glqdlt.pm6.api.model.author.AuthorImpl;
 import com.glqdlt.pm6.api.model.tag.Tag;
 

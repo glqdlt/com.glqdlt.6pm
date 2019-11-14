@@ -11,7 +11,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class BookController {
     @GetMapping("/book/new")
-    public String getBook() {
+    public String getNewBook() {
         return "book-input-form";
+    }
+
+    @GetMapping("/book")
+    public String getBooks(){
+        return "books";
     }
 }
