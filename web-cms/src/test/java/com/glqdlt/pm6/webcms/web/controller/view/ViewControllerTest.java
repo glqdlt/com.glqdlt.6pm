@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.webcms.web.view;
+package com.glqdlt.pm6.webcms.web.controller.view;
 
 import org.junit.Assert;
 import org.junit.Before;

@@ -5,5 +5,7 @@ package com.glqdlt.general.api.model;
  *
  * @author glqdlt
  */
-public interface FormModel {
+public interface TextPairForm {
+    String getInnerText();
+    String getValue();
 }

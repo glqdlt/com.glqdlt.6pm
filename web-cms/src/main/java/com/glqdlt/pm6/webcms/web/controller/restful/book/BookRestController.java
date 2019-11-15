@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.webcms.web.restful.book;
+package com.glqdlt.pm6.webcms.web.controller.restful.book;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 public class BookRestController {
 
-    @PostMapping(value = "/book/new", produces = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(value = "/book/new", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity postBookNew(
             @RequestParam String title,
             @RequestParam String author,

@@ -1,5 +1,6 @@
 package com.glqdlt.pm6.persistence;
 
+import com.glqdlt.pm6.persistence.book.repo.Pm6BookRepo;
 import com.glqdlt.pm6.persistence.book.repo.Pm6BookRepoTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -9,7 +10,7 @@ import org.junit.runners.Suite;
  *
  * @author glqdlt
  */
-@Suite.SuiteClasses({Pm6PersistenceInitTest.class, Pm6BookRepoTest.class})
+@Suite.SuiteClasses({Pm6PersistenceInitTest.class, Pm6BookRepoTest.class, Pm6BookRepo.class})
 @RunWith(Suite.class)
 public class PersistenceSuite {
 }

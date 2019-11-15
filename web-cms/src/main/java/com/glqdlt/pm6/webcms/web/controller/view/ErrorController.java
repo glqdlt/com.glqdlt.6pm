@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.webcms.web.view;
+package com.glqdlt.pm6.webcms.web.controller.view;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

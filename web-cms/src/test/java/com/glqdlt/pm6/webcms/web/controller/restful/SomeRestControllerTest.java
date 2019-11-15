@@ -1,6 +1,5 @@
-package com.glqdlt.pm6.webcms.web.restful;
+package com.glqdlt.pm6.webcms.web.controller.restful;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

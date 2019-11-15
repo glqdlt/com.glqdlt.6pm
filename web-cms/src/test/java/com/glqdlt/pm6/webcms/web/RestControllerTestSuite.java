@@ -1,7 +1,8 @@
 package com.glqdlt.pm6.webcms.web;
 
-import com.glqdlt.pm6.webcms.web.restful.SomeRestControllerTest;
-import com.glqdlt.pm6.webcms.web.restful.book.BookRestControllerTest;
+import com.glqdlt.pm6.webcms.web.controller.restful.SomeRestControllerTest;
+import com.glqdlt.pm6.webcms.web.controller.restful.book.BookRestControllerTest;
+import com.glqdlt.pm6.webcms.web.controller.restful.metadata.MetaDataRestControllerTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -11,6 +12,6 @@ import org.junit.runners.Suite;
  * @author glqdlt
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({BookRestControllerTest.class, SomeRestControllerTest.class})
+@Suite.SuiteClasses({BookRestControllerTest.class, SomeRestControllerTest.class, MetaDataRestControllerTest.class})
 public class RestControllerTestSuite {
 }

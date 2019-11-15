@@ -12,6 +12,14 @@ import java.time.LocalDateTime;
 @Table(name = "tb_author")
 public class Pm6AuthorEntity extends Pm6AuthorEntityBase {
 
+    public Pm6AuthorEntity() {
+    }
+
+    public Pm6AuthorEntity(String name) {
+        this.setName(name);
+        this.setRegDate(LocalDateTime.now());
+    }
+
     @Override
     public String getName() {
         return super.getName();

@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.webcms.web.view.filter;
+package com.glqdlt.pm6.webcms.web.controller.view.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,6 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
 /**
  * Date 2019-08-10

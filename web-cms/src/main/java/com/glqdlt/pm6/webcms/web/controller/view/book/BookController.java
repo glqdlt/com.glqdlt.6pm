@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.webcms.web.view.book;
+package com.glqdlt.pm6.webcms.web.controller.view.book;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

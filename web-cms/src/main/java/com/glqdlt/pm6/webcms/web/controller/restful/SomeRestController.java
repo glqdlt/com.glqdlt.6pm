@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.webcms.web.restful;
+package com.glqdlt.pm6.webcms.web.controller.restful;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

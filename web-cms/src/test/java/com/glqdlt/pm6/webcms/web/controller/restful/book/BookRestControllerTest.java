@@ -1,4 +1,4 @@
-package com.glqdlt.pm6.webcms.web.restful.book;
+package com.glqdlt.pm6.webcms.web.controller.restful.book;
 
 import org.junit.Assert;
 import org.junit.Before;
