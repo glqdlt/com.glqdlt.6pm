@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface BookService {
     List<Pm6BookEntity> findAllBooks();
+
+    Pm6BookEntity createNewBook(String title, List<String> authors, List<String> tags, String description);
 }

@@ -1,6 +1,7 @@
 package com.glqdlt.pm6.persistence.author.entity;
 
 import com.glqdlt.general.api.model.EntityModel;
+import com.glqdlt.general.api.model.NameWithNo;
 import com.glqdlt.pm6.api.model.author.AuthorImpl;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,7 @@ import java.time.LocalDateTime;
  *
  * @author glqdlt
  */
-public class Pm6AuthorEntityBase extends AuthorImpl implements EntityModel {
+public abstract class Pm6AuthorEntityBase extends AuthorImpl implements EntityModel, NameWithNo {
     private LocalDateTime regDate;
 
     private Long no;

@@ -1,7 +1,9 @@
 package com.glqdlt.pm6.webcms.web.controller.restful.metadata;
 
 import com.glqdlt.pm6.persistence.author.entity.Pm6AuthorEntity;
-import com.glqdlt.pm6.webcms.web.model.author.AuthorTag;
+import com.glqdlt.pm6.persistence.tag.entity.Pm6TagEntity;
+import com.glqdlt.pm6.webcms.web.model.form.tag.author.AuthorTag;
+import com.glqdlt.pm6.webcms.web.model.form.tag.tag.TagTag;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,7 +33,7 @@ public class MetaDataRestControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private MetaDataService dataService;
+    private MetaDataStore store;
 
     @Test
     public void getAuthorTags() throws Exception {
@@ -44,7 +46,7 @@ public class MetaDataRestControllerTest {
         List<AuthorTag> d = dummy.stream()
                 .map(AuthorTag::new)
                 .collect(Collectors.toList());
-        Mockito.when(dataService.findAllAuthorTags()).thenReturn(d);
+        Mockito.when(store.findAllAuthorTag()).thenReturn(d);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v0/metadata/tag/authors"))
                 .andReturn();
@@ -53,5 +55,27 @@ public class MetaDataRestControllerTest {
         Assert.assertEquals(200, res.getStatus());
         Assert.assertEquals("application/json;charset=UTF-8", res.getContentType());
         Assert.assertEquals("[{\"value\":\"0\",\"innerText\":\"kim\"},{\"value\":\"1\",\"innerText\":\"park\"}]", res.getContentAsString());
+    }
+
+    @Test
+    public void getTagTags() throws Exception {
+        List<Pm6TagEntity> dummy = Arrays.asList(Pm6TagEntity.of("자바"), Pm6TagEntity.of("프로그래밍"));
+        for (int i = 0; i < dummy.size(); i++) {
+            final Pm6TagEntity item = dummy.get(i);
+            item.setNo((long) i);
+        }
+
+        List<TagTag> d = dummy.stream()
+                .map(TagTag::new)
+                .collect(Collectors.toList());
+        Mockito.when(store.findAllTagTag()).thenReturn(d);
+
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v0/metadata/tag/tags"))
+                .andReturn();
+
+        MockHttpServletResponse res = result.getResponse();
+        Assert.assertEquals(200, res.getStatus());
+        Assert.assertEquals("application/json;charset=UTF-8", res.getContentType());
+        Assert.assertEquals("[{\"value\":\"0\",\"innerText\":\"자바\"},{\"value\":\"1\",\"innerText\":\"프로그래밍\"}]", res.getContentAsString());
     }
 }

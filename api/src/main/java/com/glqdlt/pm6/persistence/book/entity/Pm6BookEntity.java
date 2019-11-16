@@ -28,7 +28,7 @@ public class Pm6BookEntity extends Pm6BookEntityBase<Pm6TagEntity, Pm6AuthorEnti
         return super.getNo();
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "tb_book_and_tags",
             joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tags_id", referencedColumnName = "id"))
@@ -43,11 +43,12 @@ public class Pm6BookEntity extends Pm6BookEntityBase<Pm6TagEntity, Pm6AuthorEnti
     }
 
     @Override
+    @Column(unique = true)
     public String getTitle() {
         return super.getTitle();
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "tb_book_and_authors",
             joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "author_id", referencedColumnName = "id"))
@@ -55,4 +56,5 @@ public class Pm6BookEntity extends Pm6BookEntityBase<Pm6TagEntity, Pm6AuthorEnti
     public List<Pm6AuthorEntity> getAuthors() {
         return super.getAuthors();
     }
+
 }

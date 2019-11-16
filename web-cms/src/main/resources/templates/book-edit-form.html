@@ -527,37 +527,33 @@
                             <h3 class="box-title">Edit FORM</h3>
                         </div>
                         <!-- /.box-header -->
-                        <form role="form">
+                        <form role="form" action="/api/v1/book/new" method="post">
                             <div class="box-body">
                                 <div class="col-md-7">
                                     <div class="form-group">
                                         <label for="book-title">Title</label>
-                                        <input type="text" class="form-control" id="book-title"
-                                        >
+                                        <input name="title" type="text" class="form-control" id="book-title">
                                     </div>
                                     <div class="form-group">
                                         <label for="book-author">Author</label>
                                         <p>
                                             <small>작가의 이름을 입력합니다.</small>
                                         </p>
-                                        <input type="text" class="form-control" id="book-author"
-                                        >
+                                        <input name="authors" type="text" class="form-control" id="book-author">
                                     </div>
                                     <div class="form-group">
                                         <label for="book-tag">Tag (Option)</label>
                                         <p>
                                             <small>태그를 입력합니다.</small>
                                         </p>
-                                        <input type="text" class="form-control" id="book-tag"
-                                        >
+                                        <input name="tags" type="text" class="form-control" id="book-tag">
                                     </div>
                                     <div class="form-group">
                                         <label>Description (Option)</label>
                                         <p>
                                             <small>간단한 설명을 남길 수 있습니다.</small>
                                         </p>
-                                        <textarea class="form-control" rows="3"
-                                        ></textarea>
+                                        <textarea name="description" class="form-control" rows="3"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputFile">Book Upload (Option)</label>
@@ -569,7 +565,7 @@
                                         <input type="file" id="exampleInputFile">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox"> First Page Thumbnail Use
+                                                <input type="checkbox" checked> First Page Thumbnail Use
                                             </label>
                                         </div>
                                     </div>
@@ -1048,21 +1044,54 @@
 
 <script type="text/javascript">
     'use strict';
-    const tagStore = ['자바', '프로그래밍'];
-    const authorStore = ['로버트 마틴', '감마 에릭'];
-    $(document).ready(() => {
-        // see : https://github.com/aehlke/tag-it
+
+    const innerTextExtract = (arr) => {
+        return arr.map(x => x.innerText);
+    }
+
+    const authorTagPromise = new Promise((res, rej) => {
+        $.ajax({
+            url: '/api/v0/metadata/tag/authors',
+            method: 'get',
+            success: (r) => {
+                res(innerTextExtract(r));
+            },
+            error: (r) => {
+                rej(r);
+            }
+        });
+    });
+
+    const tagTagPromise = new Promise((res, rej) => {
+        $.ajax({
+            url: '/api/v0/metadata/tag/tags',
+            method: 'get',
+            success: (r) => {
+                res(innerTextExtract(r));
+            },
+            error: (r) => {
+                rej(r);
+            }
+        });
+    });
+
+
+    const tagItInit = (author, tag) => {
         $("#book-author").tagit({
-            availableTags: authorStore,
+            availableTags: author,
             allowSpaces: true,
             singleField: true
         });
         $("#book-tag").tagit({
-            availableTags: tagStore,
+            availableTags: tag,
             allowSpaces: true,
             singleField: true
         });
-    });
+    };
+
+    Promise.all([authorTagPromise, tagTagPromise]).then((values) => {
+        tagItInit(values[0], values[1]);
+    })
 
 </script>
 </body>

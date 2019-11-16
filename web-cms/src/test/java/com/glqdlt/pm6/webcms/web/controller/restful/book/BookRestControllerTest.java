@@ -1,5 +1,8 @@
 package com.glqdlt.pm6.webcms.web.controller.restful.book;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.glqdlt.pm6.persistence.author.entity.Pm6AuthorEntity;
 import com.glqdlt.pm6.persistence.book.entity.Pm6BookEntity;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,6 +18,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -22,8 +27,9 @@ import java.util.stream.IntStream;
 /**
  * 1차원적인 컨트롤러 테스트, 대상 컨트롤러를 내가 직접 이니셜라이징 해줌
  * 2차원적인 테스트는 아래 BookRestControllerTest 를 참고
- * @see com.glqdlt.pm6.webcms.web.controller.restful.metadata.MetaDataRestControllerTest
+ *
  * @author glqdlt
+ * @see com.glqdlt.pm6.webcms.web.controller.restful.metadata.MetaDataRestControllerTest
  */
 @RunWith(SpringRunner.class)
 public class BookRestControllerTest {
@@ -34,20 +40,37 @@ public class BookRestControllerTest {
     private BookService bookService;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         this.mockMvc = MockMvcBuilders.standaloneSetup(new BookRestController(bookService))
                 .build();
     }
 
     @Test
     public void postNewBook() throws Exception {
-        MvcResult a = mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/book/new")
-                .contentType(MediaType.MULTIPART_FORM_DATA)
+        Pm6BookEntity dummy = new Pm6BookEntity();
+        dummy.setTitle("clean code");
+        dummy.setAuthors(Pm6AuthorEntity.of(Arrays.asList("martin", "홍길동")));
+        dummy.setTags(new LinkedList<>());
+        dummy.setDescription("테스트");
+        Mockito.when(bookService.createNewBook(Mockito.anyString(), Mockito.anyList(), Mockito.anyList(), Mockito.any()))
+                .thenReturn(dummy);
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/book/new")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("title", "clean code")
-                .param("author", "martin,홍길동")
+                .param("authors", "martin,홍길동")
+                .param("description", "테스트")
         )
+                .andDo(MockMvcResultHandlers.print())
                 .andReturn();
-        Assert.assertEquals(200, a.getResponse().getStatus());
+        Assert.assertEquals(200, result.getResponse().getStatus());
+        String responseString = result.getResponse().getContentAsString();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        Pm6BookEntity responseNewBook = objectMapper.readValue(responseString, Pm6BookEntity.class);
+        Assert.assertEquals("clean code", responseNewBook.getTitle());
+        Assert.assertEquals("martin", responseNewBook.getAuthors().get(0).getName());
+        Assert.assertEquals("홍길동", responseNewBook.getAuthors().get(1).getName());
+        Assert.assertEquals("테스트", responseNewBook.getDescription());
     }
 
     @Test

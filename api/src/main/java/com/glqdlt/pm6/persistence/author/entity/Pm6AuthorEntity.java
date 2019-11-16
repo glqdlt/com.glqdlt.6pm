@@ -2,6 +2,8 @@ package com.glqdlt.pm6.persistence.author.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Date 2019-11-14
@@ -20,6 +22,7 @@ public class Pm6AuthorEntity extends Pm6AuthorEntityBase {
         this.setRegDate(LocalDateTime.now());
     }
 
+    @Column(unique = true)
     @Override
     public String getName() {
         return super.getName();
@@ -36,5 +39,16 @@ public class Pm6AuthorEntity extends Pm6AuthorEntityBase {
     @Override
     public Long getNo() {
         return super.getNo();
+    }
+
+    public static Pm6AuthorEntity of(String name) {
+        Pm6AuthorEntity pm6AuthorEntity = new Pm6AuthorEntity();
+        pm6AuthorEntity.setName(name);
+        pm6AuthorEntity.setRegDate(LocalDateTime.now());
+        return pm6AuthorEntity;
+    }
+
+    public static List<Pm6AuthorEntity> of(List<String> name) {
+        return name.stream().map(Pm6AuthorEntity::of).collect(Collectors.toList());
     }
 }

@@ -1,6 +1,7 @@
 package com.glqdlt.pm6.persistence.tag.entity;
 
 import com.glqdlt.general.api.model.EntityModel;
+import com.glqdlt.general.api.model.NameWithNo;
 import com.glqdlt.general.api.model.RegDateAble;
 import com.glqdlt.pm6.api.model.tag.TagImpl;
 
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
  *
  * @author glqdlt
  */
-public class Pm6TagEntityBase extends TagImpl implements RegDateAble, EntityModel {
+public abstract class Pm6TagEntityBase extends TagImpl implements NameWithNo, RegDateAble, EntityModel {
     private LocalDateTime regDate;
     private Long no;
 
