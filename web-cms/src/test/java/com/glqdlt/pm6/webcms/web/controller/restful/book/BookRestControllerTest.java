@@ -19,6 +19,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * 1차원적인 컨트롤러 테스트, 대상 컨트롤러를 내가 직접 이니셜라이징 해줌
+ * 2차원적인 테스트는 아래 BookRestControllerTest 를 참고
+ * @see com.glqdlt.pm6.webcms.web.controller.restful.metadata.MetaDataRestControllerTest
+ * @author glqdlt
+ */
 @RunWith(SpringRunner.class)
 public class BookRestControllerTest {
 
