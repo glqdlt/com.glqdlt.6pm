@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
@@ -26,7 +27,7 @@ public class MetaDataRestController {
     }
 
     @GetMapping(value = "/metadata/tag/authors", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<AuthorTag> getAuthorTags() {
+    public List<AuthorTag> getAuthorTags() throws InterruptedException {
         List<Pm6AuthorEntity> originTags = pm6AuthorRepo.findAll();
         return originTags.stream().map(AuthorTag::new)
                 .collect(Collectors.toList());
