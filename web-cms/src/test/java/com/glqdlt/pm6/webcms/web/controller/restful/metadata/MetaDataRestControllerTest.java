@@ -1,7 +1,7 @@
 package com.glqdlt.pm6.webcms.web.controller.restful.metadata;
 
 import com.glqdlt.pm6.persistence.author.entity.Pm6AuthorEntity;
-import com.glqdlt.pm6.persistence.author.repo.Pm6AuthorRepo;
+import com.glqdlt.pm6.webcms.web.model.author.AuthorTag;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +17,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Jhun
@@ -30,7 +31,7 @@ public class MetaDataRestControllerTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private Pm6AuthorRepo pm6AuthorRepo;
+    private MetaDataService dataService;
 
     @Test
     public void getAuthorTags() throws Exception {
@@ -39,7 +40,11 @@ public class MetaDataRestControllerTest {
             final Pm6AuthorEntity item = dummy.get(i);
             item.setNo((long) i);
         }
-        Mockito.when(pm6AuthorRepo.findAll()).thenReturn(dummy);
+
+        List<AuthorTag> d = dummy.stream()
+                .map(AuthorTag::new)
+                .collect(Collectors.toList());
+        Mockito.when(dataService.findAllAuthorTags()).thenReturn(d);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v0/metadata/tag/authors"))
                 .andReturn();
