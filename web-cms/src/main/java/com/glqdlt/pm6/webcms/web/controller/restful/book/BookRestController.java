@@ -1,9 +1,8 @@
 package com.glqdlt.pm6.webcms.web.controller.restful.book;
 
-import com.glqdlt.pm6.persistence.book.entity.Pm6BookEntity;
 import com.glqdlt.pm6.webcms.functions.CommaStringListMappers;
 import com.glqdlt.pm6.webcms.web.error.book.NotUniqueBookPropsError;
-import com.glqdlt.pm6.webcms.web.error.book.Pm6BookError;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -45,9 +44,10 @@ public class BookRestController {
         List<String> a = parsingComma(authors);
         List<String> t = parsingComma(tags);
         try {
-            Pm6BookEntity newBook = bookService
-                    .createNewBook(title, a, t, description);
-            return ResponseEntity.status(HttpStatus.OK).body(newBook);
+            bookService.createNewBook(title, a, t, description);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add("location", "/book");
+            return new ResponseEntity(httpHeaders, HttpStatus.FOUND);
         } catch (NotUniqueBookPropsError e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
