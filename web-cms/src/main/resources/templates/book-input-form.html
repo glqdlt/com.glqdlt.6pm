@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="/webjars/adminlte/2.3.11/dist/css/AdminLTE.min.css"/>
     <link rel="stylesheet" href="/webjars/adminlte/2.3.11/dist/css/skins/_all-skins.css"/>
     <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/bender/jquery/plugins/tag-it/css/jquery.tagit.css">
+    <link rel="stylesheet" href="/bender/jquery/plugins/tag-it/css/tagit.ui-zendesk.css">
+    <link rel="stylesheet" href="/bender/jquery/plugins/tag-it/css/jquery-ui.css">
 </head>
 <body class="skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
 <div class="wrapper" style="height: auto; min-height: 100%;">
@@ -308,7 +311,7 @@
             <!-- search form -->
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <input type="text" name="q" class="form-control" >
                     <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -528,23 +531,23 @@
                                     <div class="form-group">
                                         <label for="book-title">Title</label>
                                         <input type="text" class="form-control" id="book-title"
-                                               placeholder="example) clean code">
+                                               >
                                     </div>
                                     <div class="form-group">
                                         <label for="book-author">Author</label>
                                         <p>
-                                            <small>쉼표(,)로 구분해서 작가를 입력합니다.</small>
+                                            <small>작가의 이름을 입력합니다.</small>
                                         </p>
                                         <input type="text" class="form-control" id="book-author"
-                                               placeholder="example) martin, 홍길동, 마틴 오더스키">
+                                               >
                                     </div>
                                     <div class="form-group">
                                         <label for="book-tag">Tag (Option)</label>
                                         <p>
-                                            <small>쉼표(,)로 구분해서 Tag를 입력합니다.</small>
+                                            <small>태그를 입력합니다.</small>
                                         </p>
                                         <input type="text" class="form-control" id="book-tag"
-                                               placeholder="example) programing,java,dev,best seller">
+                                               >
                                     </div>
                                     <div class="form-group">
                                         <label>Description (Option)</label>
@@ -552,7 +555,7 @@
                                             <small>간단한 설명을 남길 수 있습니다.</small>
                                         </p>
                                         <textarea class="form-control" rows="3"
-                                                  placeholder="example) My favorite book."></textarea>
+                                                  ></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputFile">Book Upload (Option)</label>
@@ -1038,6 +1041,26 @@
 <!-- AdminLTE for demo purposes -->
 <script src="/webjars/adminlte/2.3.11/dist/js/demo.js"></script>
 <script src="/webjars/adminlte/2.3.11/plugins/fastclick/fastclick.min.js"></script>
+<script src="/bender/jquery/plugins/tag-it/js/tag-it.min.js"></script>
+<script src="/bender/jquery/plugins/tag-it/js/jquery-ui.min.js"></script>
 
+<script type="text/javascript">
+    'use strict';
+    const tagStore = ['자바','프로그래밍'];
+    const authorStore =['로버트 마틴','감마 에릭'];
+    $(document).ready(() => {
+        // see : https://github.com/aehlke/tag-it
+        $("#book-author").tagit({
+            availableTags:authorStore,
+            allowSpaces: true,
+            singleField: true
+        });
+        $("#book-tag").tagit({
+            availableTags:tagStore,
+            allowSpaces: true,
+            singleField: true
+        });
+    })
+</script>
 </body>
 </html>

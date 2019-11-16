@@ -52,7 +52,7 @@ public class Pm6TagRepoTest {
      * xxxIsLike 나 xxxLike 는 같음
      * xxxLike vs xxxContains 는 쿼리는 실제로 like 로 둘다 동일함
      * 차이점은 xxxLike 는 % 와일드카드를 붙여줘야하며, xxxContains 는 암묵적으로 jpa에서 붙여버림.
-     * xxxStartWith , xxxEndWith 와 같은 like 절의 헬퍼 메소드들이 있는 데, 이름에서 유추하듯 % 를 어디에 붙이냐 차이임
+     * xxxContains,xxxStartWith , xxxEndWith 와 같은 like 절의 헬퍼 메소드들이 있는 데, 이름에서 유추하듯 % 를 어디에 붙이냐 차이임
      * xxxStartsWith 와 xxxStartingWith 의 차이점은 모르겄다.
      */
     @Test

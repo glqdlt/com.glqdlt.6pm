@@ -1,0 +1,25 @@
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{YYYY-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="REST" class="com.glqdlt.pm6.webcms.logging.RestfulAppender">
+        <webhookUrl>https://hooks.slack.com/services/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</webhookUrl>
+    </appender>
+
+    <appender name="ASYNC_REST"
+              class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <appender-ref ref="REST" />
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="ASYNC_REST"/>
+    </root>
+</configuration>

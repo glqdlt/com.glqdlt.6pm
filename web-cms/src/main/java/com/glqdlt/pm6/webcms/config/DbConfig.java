@@ -1,0 +1,16 @@
+package com.glqdlt.pm6.webcms.config;
+
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+
+/**
+ * Date 2019-11-16
+ *
+ * @author glqdlt
+ */
+@EnableJpaRepositories(basePackages = "com.glqdlt.pm6.persistence.*")
+@EntityScan(basePackages = "com.glqdlt.pm6.persistence.*")
+@Configuration
+public class DbConfig {
+}
