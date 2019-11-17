@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * 2019-11-15
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = {MetaDataRestController.class})
+@WebMvcTest(controllers = {MetaDataRestController.class}, secure = false)
 public class MetaDataRestControllerTest {
 
     @Autowired
