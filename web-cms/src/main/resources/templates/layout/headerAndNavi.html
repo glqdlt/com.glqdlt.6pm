@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <script src="/webjars/pace/1.0.2/pace.min.js"></script>
+    <link rel="stylesheet" href="/webjars/pace/1.0.2/themes/blue/pace-theme-minimal.css">
     <meta charset="UTF-8">
     <title layout:fragment="title">Title</title>
     <link rel="stylesheet" href="/webjars/adminlte/2.3.11/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/webjars/adminlte/2.3.11/dist/css/AdminLTE.min.css"/>
     <link rel="stylesheet" href="/webjars/adminlte/2.3.11/dist/css/skins/_all-skins.css"/>
     <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.css"/>
-    <link rel="stylesheet" href="/webjars/datatables/1.10.20/css/dataTables.bootstrap.css"/>
-    <style>
-        .pm6-tag {
-            margin-right: 2px;
-            background-color: #fff1ea;
-        }
+    <th:block layout:fragment="customLink">
+
+    </th:block>
+    <style layout:fragment="customStyle">
+
     </style>
 </head>
 <body class="skin-black sidebar-mini" style="height: auto; min-height: 100%;">
@@ -246,7 +247,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="/v1/view/book"><i class="fa fa-circle-o"></i> Book Contents</a></li>
-                        <li><a href="/v1/api/book/new"><i class="fa fa-circle-o"></i> New Book</a></li>
+                        <li><a href="/v1/view/book/new"><i class="fa fa-circle-o"></i> New Book</a></li>
                         <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
                         <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a>
                         </li>
@@ -773,51 +774,11 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
 <script src="/webjars/adminlte/2.3.11/plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
 <script src="/webjars/adminlte/2.3.11/bootstrap/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
 <script src="/webjars/adminlte/2.3.11/dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
 <script src="/webjars/adminlte/2.3.11/dist/js/demo.js"></script>
 <script src="/webjars/adminlte/2.3.11/plugins/fastclick/fastclick.min.js"></script>
-<script src="/webjars/datatables/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="/webjars/datatables/1.10.20/js/dataTables.bootstrap.min.js"></script>
-
-<script type="text/javascript">
-    $('#book-table').DataTable({
-        ajax: {
-            url: '/v1/api/books',
-            method: 'get',
-            dataSrc: ""
-        },
-        order: [0, 'desc'],
-        columns: [
-            {data: 'no'},
-            {data: 'title'},
-            {
-                data: (x) => {
-                    return x.authors
-                        .map(x => makeAnchorButtonPipe('#', x.name))
-                        .reduce((acc, x) => acc + x);
-                }
-            },
-            {data: 'regDateFormatString'},
-            {
-                data: (x) => {
-                    return x.tags
-                        .map(x => makeAnchorButtonPipe('#', x.name))
-                        .reduce((acc, x) => acc + x);
-                }
-            }
-        ]
-    });
-
-    function makeAnchorButtonPipe(url, text) {
-        return '<a href="' + url + '" class="pm6-tag btn-xs btn-default">' + text + '</a>';
-    }
-
-</script>
+<th:block layout:fragment="customScript"></th:block>
 </body>
 </html>
