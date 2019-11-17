@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author glqdlt
  */
-@RequestMapping("/api")
+@RequestMapping("/v0/api")
 @RestController
 public class SomeRestController {
     /**

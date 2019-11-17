@@ -17,7 +17,7 @@ import java.util.List;
  * @author glqdlt
  */
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/v1/api")
 public class BookRestController {
 
     private BookService bookService;
@@ -46,7 +46,7 @@ public class BookRestController {
         try {
             bookService.createNewBook(title, a, t, description);
             HttpHeaders httpHeaders = new HttpHeaders();
-            httpHeaders.add("location", "/book");
+            httpHeaders.add("location", "/v1/view/book");
             return new ResponseEntity(httpHeaders, HttpStatus.FOUND);
         } catch (NotUniqueBookPropsError e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)

@@ -15,7 +15,7 @@ import java.util.List;
  */
 @SuppressWarnings("unchecked")
 @RestController
-@RequestMapping("/api/v0")
+@RequestMapping("/v1/api")
 public class MetaDataRestController {
 
     private MetaDataStore metaDataStore;
