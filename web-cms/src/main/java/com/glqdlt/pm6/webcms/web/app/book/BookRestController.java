@@ -1,6 +1,7 @@
 package com.glqdlt.pm6.webcms.web.app.book;
 
 import com.glqdlt.pm6.webcms.functions.CommaStringListMappers;
+import com.glqdlt.pm6.webcms.web.error.book.NotFoundBookError;
 import com.glqdlt.pm6.webcms.web.error.book.NotUniqueBookPropsError;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,20 @@ public class BookRestController {
 
     public BookRestController(BookService bookService) {
         this.bookService = bookService;
+    }
+
+    @PostMapping(value = "/book/{id}/delete")
+    public ResponseEntity postBookDelete(@PathVariable(value = "id") Long bookNo) {
+
+        try {
+            bookService.deleteBook(bookNo);
+            return ResponseEntity.status(200).build();
+        } catch (NotFoundBookError notFoundBookError) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(notFoundBookError.getMessage());
+        }
+
+
     }
 
     @PostMapping(value = "/book/new",

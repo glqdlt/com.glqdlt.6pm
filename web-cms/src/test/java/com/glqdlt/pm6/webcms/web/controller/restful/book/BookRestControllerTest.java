@@ -49,6 +49,24 @@ public class BookRestControllerTest {
     }
 
     @Test
+    public void postDeleteBook() throws Exception {
+        Mockito.doNothing().when(bookService).deleteBook(Mockito.anyLong());
+        MvcResult z = mockMvc.perform(MockMvcRequestBuilders.post("/v1/api/book/1/delete"))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+        Assert.assertEquals(200, z.getResponse().getStatus());
+    }
+
+    @Test
+    public void failPostDeleteBook() throws Exception {
+        Mockito.doNothing().when(bookService).deleteBook(Mockito.anyLong());
+        MvcResult z = mockMvc.perform(MockMvcRequestBuilders.post("/v1/api/book/r/delete"))
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+        Assert.assertEquals(400, z.getResponse().getStatus());
+    }
+
+    @Test
     public void postNewBook() throws Exception {
         Pm6BookEntity dummy = new Pm6BookEntity();
         dummy.setTitle("clean code");

@@ -4,7 +4,9 @@ import com.glqdlt.pm6.persistence.book.entity.Pm6BookEntity;
 import com.glqdlt.pm6.persistence.book.repo.Pm6BookRepo;
 import com.glqdlt.pm6.webcms.web.app.author.AuthorService;
 import com.glqdlt.pm6.webcms.web.app.tag.TagService;
+import com.glqdlt.pm6.webcms.web.error.book.NotFoundBookError;
 import com.glqdlt.pm6.webcms.web.error.book.NotUniqueBookPropsError;
+import com.glqdlt.pm6.webcms.web.error.book.Pm6BookError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +64,16 @@ public class BookServiceImpl implements BookService {
             pm6BookEntity.setDescription(description);
 
             return pm6BookRepo.save(pm6BookEntity);
+        }
+    }
+
+    @Override
+    public void deleteBook(Long bookNo) {
+        Optional<Pm6BookEntity> r = pm6BookRepo.findById(bookNo);
+        if (r.isPresent()) {
+            pm6BookRepo.delete(r.get());
+        } else {
+            throw new NotFoundBookError(bookNo);
         }
     }
 }
