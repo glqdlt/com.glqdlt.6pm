@@ -40,17 +40,17 @@ public class Pm6UserDetail implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return !getReference().isLock();
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return !getReference().isLock();
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return !getReference().isLock();
     }
 
     @Override
