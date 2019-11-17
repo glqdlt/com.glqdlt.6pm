@@ -1,5 +1,6 @@
 package com.glqdlt.pm6.webcms.web.controller.view;
 
+import com.glqdlt.pm6.webcms.web.app.ErrorController;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

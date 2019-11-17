@@ -2,7 +2,7 @@ package com.glqdlt.pm6.webcms.web;
 
 import com.glqdlt.pm6.webcms.web.controller.restful.SomeRestControllerTest;
 import com.glqdlt.pm6.webcms.web.controller.restful.book.BookRestControllerTest;
-import com.glqdlt.pm6.webcms.web.controller.restful.metadata.MetaDataRestControllerTest;
+import com.glqdlt.pm6.webcms.web.app.metadata.MetaDataRestControllerTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

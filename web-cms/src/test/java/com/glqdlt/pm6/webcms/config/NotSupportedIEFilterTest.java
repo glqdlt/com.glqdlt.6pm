@@ -1,6 +1,6 @@
 package com.glqdlt.pm6.webcms.config;
 
-import com.glqdlt.pm6.webcms.web.controller.view.filter.NotSupportedIEFilter;
+import com.glqdlt.pm6.webcms.web.filter.NotSupportedIEFilter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static com.glqdlt.pm6.webcms.config.FilterConfig.API_PATH_PREFIX_PATTERN;
-import static com.glqdlt.pm6.webcms.web.controller.view.ErrorController.NOT_SUPPORTED_IE_PATH;
+import static com.glqdlt.pm6.webcms.web.app.ErrorController.NOT_SUPPORTED_IE_PATH;
 
 /**
  * @author glqdlt
