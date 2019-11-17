@@ -23,7 +23,8 @@ public class UserController {
 
     @GetMapping("/user/logout")
     public String getLogout(){
-        return "user/logout";
+//        FIXME fill ... body
+        return "redirect:/user/login";
     }
 
     @GetMapping("/user/join")

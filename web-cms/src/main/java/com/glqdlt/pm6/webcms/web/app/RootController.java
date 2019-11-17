@@ -13,6 +13,11 @@ public class RootController {
 
     @GetMapping("/")
     public String root() {
-        return "root";
+        return "redirect:/v1/view/dashboard";
+    }
+
+    @GetMapping("/v1/view/dashboard")
+    public String getDashboad(){
+        return "dashboard";
     }
 }
