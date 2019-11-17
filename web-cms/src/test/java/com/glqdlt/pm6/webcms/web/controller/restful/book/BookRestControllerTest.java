@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.glqdlt.pm6.persistence.author.entity.Pm6AuthorEntity;
 import com.glqdlt.pm6.persistence.book.entity.Pm6BookEntity;
+import com.glqdlt.pm6.webcms.web.app.book.BookRestController;
+import com.glqdlt.pm6.webcms.web.app.book.BookService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +31,7 @@ import java.util.stream.IntStream;
  * 2차원적인 테스트는 아래 BookRestControllerTest 를 참고
  *
  * @author glqdlt
- * @see com.glqdlt.pm6.webcms.web.controller.restful.metadata.MetaDataRestControllerTest
+ * @see com.glqdlt.pm6.webcms.web.app.metadata.MetaDataRestControllerTest
  */
 @RunWith(SpringRunner.class)
 public class BookRestControllerTest {
@@ -62,15 +64,16 @@ public class BookRestControllerTest {
         )
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
-        Assert.assertEquals(200, result.getResponse().getStatus());
-        String responseString = result.getResponse().getContentAsString();
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule());
-        Pm6BookEntity responseNewBook = objectMapper.readValue(responseString, Pm6BookEntity.class);
-        Assert.assertEquals("clean code", responseNewBook.getTitle());
-        Assert.assertEquals("martin", responseNewBook.getAuthors().get(0).getName());
-        Assert.assertEquals("홍길동", responseNewBook.getAuthors().get(1).getName());
-        Assert.assertEquals("테스트", responseNewBook.getDescription());
+        Assert.assertEquals(302, result.getResponse().getStatus());
+        Assert.assertEquals("/book",result.getResponse().getHeader("location"));
+//        String responseString = result.getResponse().getContentAsString();
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.registerModule(new JavaTimeModule());
+//        Pm6BookEntity responseNewBook = objectMapper.readValue(responseString, Pm6BookEntity.class);
+//        Assert.assertEquals("clean code", responseNewBook.getTitle());
+//        Assert.assertEquals("martin", responseNewBook.getAuthors().get(0).getName());
+//        Assert.assertEquals("홍길동", responseNewBook.getAuthors().get(1).getName());
+//        Assert.assertEquals("테스트", responseNewBook.getDescription());
     }
 
     @Test
