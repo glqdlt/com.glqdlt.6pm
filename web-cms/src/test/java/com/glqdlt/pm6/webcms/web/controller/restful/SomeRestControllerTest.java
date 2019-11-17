@@ -25,7 +25,7 @@ public class SomeRestControllerTest {
 
     @Test
     public void healthCheck() throws Exception {
-        MvcResult z = mockMvc.perform(MockMvcRequestBuilders.get("/api/health"))
+        MvcResult z = mockMvc.perform(MockMvcRequestBuilders.get("/v0/api/health"))
                 .andReturn();
         Assert.assertEquals(200,z.getResponse().getStatus());
 

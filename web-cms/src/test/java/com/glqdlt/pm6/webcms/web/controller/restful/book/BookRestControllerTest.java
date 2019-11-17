@@ -57,7 +57,7 @@ public class BookRestControllerTest {
         dummy.setDescription("테스트");
         Mockito.when(bookService.createNewBook(Mockito.anyString(), Mockito.anyList(), Mockito.anyList(), Mockito.any()))
                 .thenReturn(dummy);
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/book/new")
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/v1/api/book/new")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("title", "clean code")
                 .param("authors", "martin,홍길동")
@@ -89,7 +89,7 @@ public class BookRestControllerTest {
                 })
                 .collect(Collectors.toList());
         Mockito.when(bookService.findAllBooks()).thenReturn(zzz);
-        MvcResult z = mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/books"))
+        MvcResult z = mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/books"))
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
         Assert.assertEquals(200, z.getResponse().getStatus());

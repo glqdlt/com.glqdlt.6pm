@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @Controller
 public class BookController {
-    @GetMapping("/book/new")
+    @GetMapping("/v1/view/book/new")
     public String getNewBook() {
         return "book-edit-form";
     }
 
-    @GetMapping("/book")
+    @GetMapping("/v1/view/book")
     public String getBooks(){return "book-table";}
 }

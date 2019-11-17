@@ -48,7 +48,7 @@ public class MetaDataRestControllerTest {
                 .collect(Collectors.toList());
         Mockito.when(store.findByTagType(MetaCriteria.AUTHOR)).thenReturn(d);
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v0/metadata/tag/authors"))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/metadata/tag/authors"))
                 .andReturn();
 
         MockHttpServletResponse res = result.getResponse();
@@ -70,7 +70,7 @@ public class MetaDataRestControllerTest {
                 .collect(Collectors.toList());
         Mockito.when(store.findByTagType(MetaCriteria.TAG)).thenReturn(d);
 
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v0/metadata/tag/tags"))
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/v1/api/metadata/tag/tags"))
                 .andReturn();
 
         MockHttpServletResponse res = result.getResponse();

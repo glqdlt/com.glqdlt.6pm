@@ -17,7 +17,7 @@ import java.util.List;
  * @author glqdlt
  */
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/v1/api")
 public class BookRestController {
 
     private BookService bookService;

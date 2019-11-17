@@ -526,7 +526,7 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">Edit FORM</h3>
                             <div class="pull-right">
-                                <a href="/book">
+                                <a href="/v1/view/book">
                                     <button type="button" class="btn btn-block btn-primary btn-sm">BOOK Entry</button>
                                 </a>
                             </div>
@@ -534,7 +534,7 @@
                         <!-- /.box-header -->
 
                         <div class="box-body">
-                            <form id="book-form" role="form" action="/api/v1/book/new" method="post">
+                            <form id="book-form" role="form" action="/v1/api/book/new" method="post">
                                 <div class="col-md-7">
                                     <div class="form-group">
                                         <label for="book-title">Title</label>
@@ -1105,7 +1105,7 @@
 
     const authorTagPromise = new Promise((res, rej) => {
         $.ajax({
-            url: '/api/v0/metadata/tag/authors',
+            url: '/v1/api/metadata/tag/authors',
             method: 'get',
             success: (r) => {
                 res(innerTextExtract(r));
@@ -1118,7 +1118,7 @@
 
     const tagTagPromise = new Promise((res, rej) => {
         $.ajax({
-            url: '/api/v0/metadata/tag/tags',
+            url: '/v1/api/metadata/tag/tags',
             method: 'get',
             success: (r) => {
                 res(innerTextExtract(r));
