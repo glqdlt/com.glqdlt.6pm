@@ -2,7 +2,6 @@ package com.glqdlt.pm6.webcms.web.controller.restful.metadata;
 
 import com.glqdlt.pm6.webcms.web.model.form.tag.TagForm;
 import com.glqdlt.pm6.webcms.web.model.form.tag.author.AuthorTag;
-import com.glqdlt.pm6.webcms.web.model.form.tag.tag.TagTag;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,12 +26,12 @@ public class MetaDataRestController {
 
     @GetMapping(value = "/metadata/tag/authors", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<AuthorTag> getAuthorTags() {
-        return metaDataStore.findAllAuthorTag();
+        return metaDataStore.findByTagType(MetaCriteria.AUTHOR);
     }
 
     @GetMapping(value = "/metadata/tag/tags", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<TagForm> getTagTags() {
-        return metaDataStore.findAllTagTag();
+        return metaDataStore.findByTagType(MetaCriteria.TAG);
     }
 
 }

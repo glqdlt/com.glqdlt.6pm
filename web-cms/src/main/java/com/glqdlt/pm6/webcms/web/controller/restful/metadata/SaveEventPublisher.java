@@ -1,10 +1,10 @@
 package com.glqdlt.pm6.webcms.web.controller.restful.metadata;
 
 /**
- * Date 2019-11-16
+ * Date 2019-11-17
  *
  * @author glqdlt
  */
-public interface CacheMetaDataStore extends MetaDataStore{
-    void sync();
+public interface SaveEventPublisher {
+    void addEvent(SaveEvent event);
 }

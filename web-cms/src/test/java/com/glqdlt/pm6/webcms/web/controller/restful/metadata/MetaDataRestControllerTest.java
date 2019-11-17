@@ -46,7 +46,7 @@ public class MetaDataRestControllerTest {
         List<AuthorTag> d = dummy.stream()
                 .map(AuthorTag::new)
                 .collect(Collectors.toList());
-        Mockito.when(store.findAllAuthorTag()).thenReturn(d);
+        Mockito.when(store.findByTagType(MetaCriteria.AUTHOR)).thenReturn(d);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v0/metadata/tag/authors"))
                 .andReturn();
@@ -68,7 +68,7 @@ public class MetaDataRestControllerTest {
         List<TagTag> d = dummy.stream()
                 .map(TagTag::new)
                 .collect(Collectors.toList());
-        Mockito.when(store.findAllTagTag()).thenReturn(d);
+        Mockito.when(store.findByTagType(MetaCriteria.TAG)).thenReturn(d);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/v0/metadata/tag/tags"))
                 .andReturn();
