@@ -66,15 +66,7 @@ public class BookRestControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
         Assert.assertEquals(302, result.getResponse().getStatus());
-        Assert.assertEquals("/book", result.getResponse().getHeader("location"));
-//        String responseString = result.getResponse().getContentAsString();
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.registerModule(new JavaTimeModule());
-//        Pm6BookEntity responseNewBook = objectMapper.readValue(responseString, Pm6BookEntity.class);
-//        Assert.assertEquals("clean code", responseNewBook.getTitle());
-//        Assert.assertEquals("martin", responseNewBook.getAuthors().get(0).getName());
-//        Assert.assertEquals("홍길동", responseNewBook.getAuthors().get(1).getName());
-//        Assert.assertEquals("테스트", responseNewBook.getDescription());
+        Assert.assertEquals("/v1/view/book", result.getResponse().getHeader("location"));
     }
 
     @Test
