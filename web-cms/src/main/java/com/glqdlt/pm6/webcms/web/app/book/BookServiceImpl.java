@@ -35,7 +35,7 @@ public class BookServiceImpl implements BookService {
     }
 
     public List<Pm6BookEntity> findAllBooks() {
-        return pm6BookRepo.findAll();
+        return pm6BookRepo.findAllByOrderByNoDesc();
     }
 
     public Optional<Pm6BookEntity> findBookByTitle(String title) {

@@ -1,7 +1,6 @@
 package com.glqdlt.pm6.persistence.book.entity;
 
 import com.glqdlt.general.api.model.EntityModel;
-import com.glqdlt.general.api.model.NameWithNo;
 import com.glqdlt.pm6.persistence.author.entity.Pm6AuthorEntityBase;
 import com.glqdlt.pm6.api.model.book.Pm6Book;
 import com.glqdlt.pm6.persistence.tag.entity.Pm6TagEntityBase;

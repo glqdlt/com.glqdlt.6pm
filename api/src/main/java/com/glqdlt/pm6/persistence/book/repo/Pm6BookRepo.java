@@ -14,4 +14,5 @@ import java.util.Optional;
 public interface Pm6BookRepo extends JpaRepository<Pm6BookEntity, Long> {
     Optional<Pm6BookEntity> findByTitle(String title);
     List<Pm6BookEntity> findAllByTitleLike(String title);
+    List<Pm6BookEntity> findAllByOrderByNoDesc();
 }

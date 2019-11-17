@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,7 +66,7 @@ public class BookRestControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
         Assert.assertEquals(302, result.getResponse().getStatus());
-        Assert.assertEquals("/book",result.getResponse().getHeader("location"));
+        Assert.assertEquals("/book", result.getResponse().getHeader("location"));
 //        String responseString = result.getResponse().getContentAsString();
 //        ObjectMapper objectMapper = new ObjectMapper();
 //        objectMapper.registerModule(new JavaTimeModule());
@@ -83,6 +84,7 @@ public class BookRestControllerTest {
                     Pm6BookEntity pm6BookEntity = new Pm6BookEntity();
                     pm6BookEntity.setNo((long) x);
                     pm6BookEntity.setTitle("title" + x);
+                    pm6BookEntity.setRegDate(LocalDateTime.of(2019, 1, 1, 1, 1));
                     return pm6BookEntity;
                 })
                 .collect(Collectors.toList());
@@ -91,6 +93,6 @@ public class BookRestControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
         Assert.assertEquals(200, z.getResponse().getStatus());
-        Assert.assertEquals("[{\"title\":\"title1\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":null,\"no\":1},{\"title\":\"title2\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":null,\"no\":2},{\"title\":\"title3\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":null,\"no\":3},{\"title\":\"title4\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":null,\"no\":4},{\"title\":\"title5\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":null,\"no\":5},{\"title\":\"title6\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":null,\"no\":6},{\"title\":\"title7\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":null,\"no\":7},{\"title\":\"title8\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":null,\"no\":8},{\"title\":\"title9\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":null,\"no\":9},{\"title\":\"title10\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":null,\"no\":10}]", z.getResponse().getContentAsString());
+        Assert.assertEquals("[{\"title\":\"title1\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":1,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title2\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":2,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title3\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":3,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title4\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":4,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title5\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":5,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title6\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":6,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title7\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":7,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title8\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":8,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title9\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":9,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title10\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":10,\"regDateFormatString\":\"2019-01-01 01:01:00\"}]", z.getResponse().getContentAsString());
     }
 }

@@ -1,11 +1,14 @@
 package com.glqdlt.pm6.webcms.config;
 
+import com.glqdlt.pm6.webcms.web.app.book.BookService;
+import com.glqdlt.pm6.webcms.web.app.metadata.MetaDataStore;
 import com.glqdlt.pm6.webcms.web.filter.NotSupportedIEFilter;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -27,6 +30,12 @@ public class NotSupportedIEFilterTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
+
+    @MockBean
+    private BookService bookService;
+
+    @MockBean
+    private MetaDataStore metaDataStore;
 
     @Test
     public void urlMatcher() {

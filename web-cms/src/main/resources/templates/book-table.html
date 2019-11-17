@@ -8,6 +8,12 @@
     <link rel="stylesheet" href="/webjars/adminlte/2.3.11/dist/css/skins/_all-skins.css"/>
     <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.css"/>
     <link rel="stylesheet" href="/webjars/datatables/1.10.20/css/dataTables.bootstrap.css"/>
+    <style>
+        .pm6-tag {
+            margin-right: 2px;
+            background-color: #fff1ea;
+        }
+    </style>
 </head>
 <body class="skin-blue sidebar-mini" style="height: auto; min-height: 100%;">
 <div class="wrapper" style="height: auto; min-height: 100%;">
@@ -995,26 +1001,32 @@
             method: 'get',
             dataSrc: ""
         },
+        order: [0, 'desc'],
         columns: [
             {data: 'no'},
             {data: 'title'},
             {
                 data: (x) => {
                     return x.authors
-                        .map(x => x.name)
-                        .reduce((acc, x) => acc + ', ' + x);
+                        .map(x => makeAnchorButtonPipe('#', x.name))
+                        .reduce((acc, x) => acc + x);
                 }
             },
-            {data: 'regDate'},
+            {data: 'regDateFormatString'},
             {
                 data: (x) => {
                     return x.tags
-                        .map(x => x.name)
-                        .reduce((acc, x) => acc + ', ' + x);
+                        .map(x => makeAnchorButtonPipe('#', x.name))
+                        .reduce((acc, x) => acc + x);
                 }
             }
         ]
     });
+
+    function makeAnchorButtonPipe(url, text) {
+        return '<a href="' + url + '" class="pm6-tag btn-xs btn-default">' + text + '</a>';
+    }
+
 </script>
 </body>
 </html>

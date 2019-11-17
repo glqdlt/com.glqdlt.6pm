@@ -532,8 +532,9 @@
                             </div>
                         </div>
                         <!-- /.box-header -->
-                        <form role="form" action="/api/v1/book/new" method="post">
-                            <div class="box-body">
+
+                        <div class="box-body">
+                            <form id="book-form" role="form" action="/api/v1/book/new" method="post">
                                 <div class="col-md-7">
                                     <div class="form-group">
                                         <label for="book-title">Title</label>
@@ -574,44 +575,57 @@
                                             </label>
                                         </div>
                                     </div>
-
-
-                                </div>
-                                <div class="col-md-5">
-
                                     <div class="form-group">
-                                        <label>Thumbnail</label>
-                                        <div class="radio">
-                                            <label><input type="radio" name="thumbnailManual" checked
-                                                          value="none">None</label>
-                                            <label><input type="radio" name="thumbnailManual"
-                                                          value="url">URL</label>
-                                            <label><input type="radio" name="thumbnailManual"
-                                                          value="upload">Upload</label>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="url" class="form-control">
-                                        <input type="file" id="thumbnail">
-
-                                        <p class="help-block">5MB size limit</p>
+                                        <input type="hidden" name="thumbnailUrl">
                                     </div>
 
-                                    <img class="col-lg-10 col-md-12 col-xs-12"
-                                         src="https://bookthumb-phinf.pstatic.net/cover/107/710/10771065.jpg?udate=20160721">
                                 </div>
-                            </div>
-                            <!-- /.box-body -->
+                            </form>
+                            <div class="col-md-5">
 
-                            <div class="box-footer">
-                                <div class="col-md-7">
-                                    <button type="submit" class="col-md-7 col-xs-6 btn btn-primary">Submit</button>
-                                    <button type="reset" class="col-md-5 col-xs-6 btn btn-default">Reset
-                                    </button>
+                                <div class="form-group">
+                                    <label>Thumbnail</label>
+                                    <div id="thumbnail-zone" class="radio">
+                                        <label><input type="radio" name="thumbnailManual"
+                                                      data-show-zone-id="" onchange="setThumbNailPreviewUrl('')"
+                                                      value="none" checked="checked">None</label>
+                                        <label><input type="radio" name="thumbnailManual"
+                                                      data-show-zone-id="thumbnail-url-zone"
+                                                      value="url">URL</label>
+                                        <label><input type="radio" name="thumbnailManual"
+                                                      data-show-zone-id="thumbnail-self-upload-zone"
+                                                      value="upload">Upload</label>
+                                    </div>
                                 </div>
 
+                                <div style="display: none" data-thumbnail-zone id="thumbnail-url-zone"
+                                     class="form-group">
+                                    <input onchange="thumbnailPreviewFunc(this)" type="url" class="form-control">
+
+                                </div>
+                                <div style="display: none" data-thumbnail-zone id="thumbnail-self-upload-zone"
+                                     class="form-group">
+                                    <input onchange="thumbnailPreviewFunc(this)" type="file" id="thumbnail">
+
+                                    <p class="help-block">5MB size limit</p>
+                                </div>
+
+
+                                <img id="thumbnail-preview" class="col-lg-10 col-md-12 col-xs-12"
+                                     src="">
                             </div>
-                        </form>
+                        </div>
+                        <!-- /.box-body -->
+
+                        <div class="box-footer">
+                            <div class="col-md-7">
+                                <button onclick="submitForm('book-form')" class="col-md-7 col-xs-6 btn btn-primary">Submit</button>
+                                <button onclick="resetForm('book-form')" class="col-md-5 col-xs-6 btn btn-default">Reset
+                                </button>
+                            </div>
+
+                        </div>
+
                     </div>
                     <!-- /.box -->
 
@@ -1050,6 +1064,41 @@
 <script type="text/javascript">
     'use strict';
 
+    function submitForm(id){
+        $(document.getElementById(id))[0].submit();
+    }
+
+    function resetForm(id){
+        $(document.getElementById(id))[0].reset();
+    }
+    const setThumbNailPreviewUrl = (inputUrl) => {
+        $('#thumbnail-preview').attr('src', inputUrl);
+        $('input[name="thumbnailUrl"]').attr('value',inputUrl);
+    }
+
+    function thumbnailPreviewFunc(e) {
+        const el = $(e);
+        const type = el.attr('type');
+        if (type === 'url') {
+            const inputUrl = el.val();
+            setThumbNailPreviewUrl(inputUrl);
+        } else if (type === 'file') {
+
+        }
+
+    }
+
+    const hideDrawZone = () => {
+        $('div[data-thumbnail-zone]').hide();
+    };
+    const thumbnailChangeEvent = document.getElementById('thumbnail-zone').addEventListener('change', (e) => {
+        const checkedElementDrawZoneId = $(e.target).attr('data-show-zone-id');
+        hideDrawZone();
+        if (checkedElementDrawZoneId !== '') {
+            $('#' + checkedElementDrawZoneId).show();
+        }
+    });
+
     const innerTextExtract = (arr) => {
         return arr.map(x => x.innerText);
     }
@@ -1097,6 +1146,7 @@
     Promise.all([authorTagPromise, tagTagPromise]).then((values) => {
         tagItInit(values[0], values[1]);
     })
+
 
 </script>
 </body>
