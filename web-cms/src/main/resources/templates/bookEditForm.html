@@ -214,15 +214,18 @@
         });
 
 
+        //@see https://github.com/aehlke/tag-it/blob/master/README.markdown
         const tagItInit = (author, tag) => {
             $("#book-author").tagit({
                 availableTags: author,
                 allowSpaces: true,
+                showAutocompleteOnFocus : true,
                 singleField: true
             });
             $("#book-tag").tagit({
                 availableTags: tag,
                 allowSpaces: true,
+                showAutocompleteOnFocus : true,
                 singleField: true
             });
         };
