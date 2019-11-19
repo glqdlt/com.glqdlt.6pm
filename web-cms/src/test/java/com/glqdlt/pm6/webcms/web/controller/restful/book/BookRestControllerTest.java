@@ -1,7 +1,5 @@
 package com.glqdlt.pm6.webcms.web.controller.restful.book;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.glqdlt.pm6.persistence.author.entity.Pm6AuthorEntity;
 import com.glqdlt.pm6.persistence.book.entity.Pm6BookEntity;
 import com.glqdlt.pm6.webcms.web.app.book.BookRestController;
@@ -76,6 +74,28 @@ public class BookRestControllerTest {
         Mockito.when(bookService.createNewBook(Mockito.anyString(), Mockito.anyList(), Mockito.anyList(), Mockito.any()))
                 .thenReturn(dummy);
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/v1/api/book/new")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("title", "clean code")
+                .param("authors", "martin,홍길동")
+                .param("description", "테스트")
+        )
+                .andDo(MockMvcResultHandlers.print())
+                .andReturn();
+        Assert.assertEquals(302, result.getResponse().getStatus());
+        Assert.assertEquals("/v1/view/book", result.getResponse().getHeader("location"));
+    }
+
+    @Test
+    public void updateBook() throws Exception {
+        Pm6BookEntity dummy = new Pm6BookEntity();
+        dummy.setNo(1L);
+        dummy.setTitle("clean code");
+        dummy.setAuthors(Pm6AuthorEntity.of(Arrays.asList("martin", "홍길동")));
+        dummy.setTags(new LinkedList<>());
+        dummy.setDescription("테스트");
+        Mockito.when(bookService.updateBook(Mockito.anyLong(), Mockito.anyString(), Mockito.anyList(), Mockito.anyList(), Mockito.any()))
+                .thenReturn(dummy);
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/v1/api/book/1/edit")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
                 .param("title", "clean code")
                 .param("authors", "martin,홍길동")
