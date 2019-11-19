@@ -76,4 +76,16 @@ public class BookServiceImpl implements BookService {
             throw new NotFoundBookError(bookNo);
         }
     }
+
+    @Override
+    public Optional<Pm6BookEntity> findByBookId(Long id) {
+        return pm6BookRepo.findById(id);
+    }
+
+    @Transactional
+    @Override
+    public Pm6BookEntity updateBook(Long id, String title, List<String> authors, List<String> tags, String description) {
+        deleteBook(id);
+        return createNewBook(title, authors, tags, description);
+    }
 }

@@ -32,7 +32,8 @@
                         <h3 class="box-title">DataTables</h3>
                         <div class="pull-right">
                             <a href="/v1/view/book/new">
-                                <button type="button" class="btn btn-block btn-primary btn-sm"><i class="fa fa-edit"></i> New BOOK
+                                <button type="button" class="btn btn-block btn-primary btn-sm"><i
+                                        class="fa fa-edit"></i> New BOOK
                                 </button>
                             </a>
                         </div>
@@ -42,6 +43,7 @@
                             <table id="book-table" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>T</th>
                                     <th>NO</th>
                                     <th>TITLE</th>
                                     <th>AUTHOR</th>
@@ -51,6 +53,7 @@
                                 </thead>
                                 <tfoot>
                                 <tr>
+                                    <th>T</th>
                                     <th>NO</th>
                                     <th>TITLE</th>
                                     <th>AUTHOR</th>
@@ -84,10 +87,28 @@
                 method: 'get',
                 dataSrc: ""
             },
-            order: [0, 'desc'],
+            order: [1, 'desc'],
             columns: [
-                {data: 'no'},
-                {data: 'title'},
+                {
+                    data: 'thumbnail', render: (d) => {
+                        if (d !== undefined) {
+                            return "<i class='fa fa-eye'></i>";
+                        } else {
+                            return "";
+                        }
+                    }
+                },
+                {
+                    data: 'no', render: (d) => {
+                        return "<a href='/v1/view/book/" + d + "/edit'>" + d + "</a>";
+                    }
+                },
+
+                {
+                    data: (d) => {
+                        return "<a href='/v1/view/book/" + d.no + "/edit'>" + d.title + "</a>"
+                    }
+                },
                 {
                     data: (x) => {
                         return x.authors

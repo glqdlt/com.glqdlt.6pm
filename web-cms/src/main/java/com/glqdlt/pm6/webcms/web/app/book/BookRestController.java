@@ -48,9 +48,34 @@ public class BookRestController {
 
     }
 
+    @PostMapping(value = "/book/{no}/edit",
+            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public ResponseEntity postUpdateBook(
+            @PathVariable Long no,
+            @RequestParam String title,
+            @RequestParam String authors,
+            @RequestParam(required = false) String tags,
+            @RequestParam(required = false) String description) {
+
+        List<String> a = parsingComma(authors);
+        List<String> t = parsingComma(tags);
+        try {
+            bookService.updateBook(no, title, a, t, description);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add("location", "/v1/view/book");
+            return new ResponseEntity(httpHeaders, HttpStatus.FOUND);
+        } catch (
+                NotUniqueBookPropsError e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
+
+
     @PostMapping(value = "/book/new",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity postBookNew(
+            @RequestParam(required = false) Long no,
             @RequestParam String title,
             @RequestParam String authors,
             @RequestParam(required = false) String tags,
@@ -63,7 +88,8 @@ public class BookRestController {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.add("location", "/v1/view/book");
             return new ResponseEntity(httpHeaders, HttpStatus.FOUND);
-        } catch (NotUniqueBookPropsError e) {
+        } catch (
+                NotUniqueBookPropsError e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
         }
