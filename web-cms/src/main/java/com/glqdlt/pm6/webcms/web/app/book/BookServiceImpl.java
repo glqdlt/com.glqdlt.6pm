@@ -6,7 +6,6 @@ import com.glqdlt.pm6.webcms.web.app.author.AuthorService;
 import com.glqdlt.pm6.webcms.web.app.tag.TagService;
 import com.glqdlt.pm6.webcms.web.error.book.NotFoundBookError;
 import com.glqdlt.pm6.webcms.web.error.book.NotUniqueBookPropsError;
-import com.glqdlt.pm6.webcms.web.error.book.Pm6BookError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -52,29 +51,33 @@ public class BookServiceImpl implements BookService {
             throw new NotUniqueBookPropsError(String.format("타이틀 '%s'은 이미 존재합니다.", title));
         } else {
             Pm6BookEntity pm6BookEntity = new Pm6BookEntity();
-            if (authors == null || authors.size() == 0) {
-                throw new IllegalArgumentException("Author is empty");
-            }
-            if (tags != null) {
-                pm6BookEntity.setTags(tagService.onDuplicateAuthorFindOrPersist(tags));
-            }
-            pm6BookEntity.setAuthors(authorService.onDuplicateAuthorFindOrPersist(authors));
-            pm6BookEntity.setTitle(title);
-            pm6BookEntity.setRegDate(LocalDateTime.now());
-            pm6BookEntity.setDescription(description);
+            bookSetup(title, authors, tags, description, pm6BookEntity);
 
             return pm6BookRepo.save(pm6BookEntity);
         }
     }
 
+    private void bookSetup(String title, List<String> authors, List<String> tags, String description, Pm6BookEntity pm6BookEntity) {
+        if (authors == null || authors.size() == 0) {
+            throw new IllegalArgumentException("Author is empty");
+        }
+        if (tags != null) {
+            pm6BookEntity.setTags(tagService.onDuplicateAuthorFindOrPersist(tags));
+        }
+        pm6BookEntity.setAuthors(authorService.onDuplicateAuthorFindOrPersist(authors));
+        pm6BookEntity.setTitle(title);
+        pm6BookEntity.setRegDate(LocalDateTime.now());
+        pm6BookEntity.setDescription(description);
+    }
+
+    public Pm6BookEntity findByBook(Long no) {
+        return pm6BookRepo.findById(no).orElseThrow(() -> new NotFoundBookError(no));
+    }
+
     @Override
     public void deleteBook(Long bookNo) {
-        Optional<Pm6BookEntity> r = pm6BookRepo.findById(bookNo);
-        if (r.isPresent()) {
-            pm6BookRepo.delete(r.get());
-        } else {
-            throw new NotFoundBookError(bookNo);
-        }
+        Pm6BookEntity b = findByBook(bookNo);
+        pm6BookRepo.delete(b);
     }
 
     @Override
@@ -84,8 +87,9 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
-    public Pm6BookEntity updateBook(Long id, String title, List<String> authors, List<String> tags, String description) {
-        deleteBook(id);
-        return createNewBook(title, authors, tags, description);
+    public Pm6BookEntity updateBook(Long no, String title, List<String> authors, List<String> tags, String description) {
+        Pm6BookEntity book = findByBook(no);
+        bookSetup(title, authors, tags, description, book);
+        return pm6BookRepo.save(book);
     }
 }
