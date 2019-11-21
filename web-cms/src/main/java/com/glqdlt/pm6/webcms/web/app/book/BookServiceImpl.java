@@ -3,6 +3,8 @@ package com.glqdlt.pm6.webcms.web.app.book;
 import com.glqdlt.pm6.persistence.book.entity.Pm6BookEntity;
 import com.glqdlt.pm6.persistence.book.repo.Pm6BookRepo;
 import com.glqdlt.pm6.webcms.web.app.author.AuthorService;
+import com.glqdlt.pm6.webcms.web.app.book.model.BookCreateForm;
+import com.glqdlt.pm6.webcms.web.app.book.model.BookUpdateForm;
 import com.glqdlt.pm6.webcms.web.app.tag.TagService;
 import com.glqdlt.pm6.webcms.web.error.book.NotFoundBookError;
 import com.glqdlt.pm6.webcms.web.error.book.NotUniqueBookPropsError;
@@ -45,19 +47,24 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
-    public Pm6BookEntity createNewBook(String title, List<String> authors, List<String> tags, String description) {
-        Optional<Pm6BookEntity> existBook = findBookByTitle(title);
+    public Pm6BookEntity createNewBook(BookCreateForm form) {
+        Optional<Pm6BookEntity> existBook = findBookByTitle(form.getTitle());
         if (existBook.isPresent()) {
-            throw new NotUniqueBookPropsError(String.format("타이틀 '%s'은 이미 존재합니다.", title));
+            throw new NotUniqueBookPropsError(String.format("타이틀 '%s'은 이미 존재합니다.", form.getTitle()));
         } else {
             Pm6BookEntity pm6BookEntity = new Pm6BookEntity();
-            bookSetup(title, authors, tags, description, pm6BookEntity);
+            bookSetup(form, pm6BookEntity);
 
             return pm6BookRepo.save(pm6BookEntity);
         }
     }
 
-    private void bookSetup(String title, List<String> authors, List<String> tags, String description, Pm6BookEntity pm6BookEntity) {
+    private void bookSetup(BookCreateForm form, Pm6BookEntity pm6BookEntity) {
+        List<String> authors = form.getAuthors();
+        List<String> tags = form.getTags();
+        String title = form.getTitle();
+        String description = form.getDescription();
+        String thumbnail = form.getThumbnail();
         if (authors == null || authors.size() == 0) {
             throw new IllegalArgumentException("Author is empty");
         }
@@ -68,6 +75,7 @@ public class BookServiceImpl implements BookService {
         pm6BookEntity.setTitle(title);
         pm6BookEntity.setRegDate(LocalDateTime.now());
         pm6BookEntity.setDescription(description);
+        pm6BookEntity.setThumbnailUrl(thumbnail);
     }
 
     public Pm6BookEntity findByBook(Long no) {
@@ -87,9 +95,9 @@ public class BookServiceImpl implements BookService {
 
     @Transactional
     @Override
-    public Pm6BookEntity updateBook(Long no, String title, List<String> authors, List<String> tags, String description) {
-        Pm6BookEntity book = findByBook(no);
-        bookSetup(title, authors, tags, description, book);
+    public Pm6BookEntity updateBook(BookUpdateForm form) {
+        Pm6BookEntity book = findByBook(form.getNo());
+        bookSetup(form, book);
         return pm6BookRepo.save(book);
     }
 }
