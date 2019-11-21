@@ -4,6 +4,8 @@ import com.glqdlt.pm6.persistence.author.entity.Pm6AuthorEntity;
 import com.glqdlt.pm6.persistence.book.entity.Pm6BookEntity;
 import com.glqdlt.pm6.webcms.web.app.book.BookRestController;
 import com.glqdlt.pm6.webcms.web.app.book.BookService;
+import com.glqdlt.pm6.webcms.web.app.book.model.BookCreateForm;
+import com.glqdlt.pm6.webcms.web.app.book.model.BookUpdateForm;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -71,7 +73,7 @@ public class BookRestControllerTest {
         dummy.setAuthors(Pm6AuthorEntity.of(Arrays.asList("martin", "홍길동")));
         dummy.setTags(new LinkedList<>());
         dummy.setDescription("테스트");
-        Mockito.when(bookService.createNewBook(Mockito.anyString(), Mockito.anyList(), Mockito.anyList(), Mockito.any()))
+        Mockito.when(bookService.createNewBook(new BookCreateForm("clean code", "martin,홍길동", null, "테스트", null)))
                 .thenReturn(dummy);
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/v1/api/book/new")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -93,7 +95,7 @@ public class BookRestControllerTest {
         dummy.setAuthors(Pm6AuthorEntity.of(Arrays.asList("martin", "홍길동")));
         dummy.setTags(new LinkedList<>());
         dummy.setDescription("테스트");
-        Mockito.when(bookService.updateBook(Mockito.anyLong(), Mockito.anyString(), Mockito.anyList(), Mockito.anyList(), Mockito.any()))
+        Mockito.when(bookService.updateBook(new BookUpdateForm("clean code", "martin,홍길동", "", "테스트", null, 1L)))
                 .thenReturn(dummy);
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/v1/api/book/1/edit")
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
@@ -123,6 +125,6 @@ public class BookRestControllerTest {
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
         Assert.assertEquals(200, z.getResponse().getStatus());
-        Assert.assertEquals("[{\"title\":\"title1\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":1,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title2\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":2,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title3\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":3,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title4\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":4,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title5\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":5,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title6\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":6,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title7\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":7,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title8\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":8,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title9\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":9,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title10\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":10,\"regDateFormatString\":\"2019-01-01 01:01:00\"}]", z.getResponse().getContentAsString());
+        Assert.assertEquals("[{\"title\":\"title1\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":1,\"thumbnailUrl\":null,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title2\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":2,\"thumbnailUrl\":null,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title3\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":3,\"thumbnailUrl\":null,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title4\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":4,\"thumbnailUrl\":null,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title5\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":5,\"thumbnailUrl\":null,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title6\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":6,\"thumbnailUrl\":null,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title7\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":7,\"thumbnailUrl\":null,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title8\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":8,\"thumbnailUrl\":null,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title9\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":9,\"thumbnailUrl\":null,\"regDateFormatString\":\"2019-01-01 01:01:00\"},{\"title\":\"title10\",\"authors\":null,\"description\":null,\"tags\":null,\"regDate\":[2019,1,1,1,1],\"no\":10,\"thumbnailUrl\":null,\"regDateFormatString\":\"2019-01-01 01:01:00\"}]", z.getResponse().getContentAsString());
     }
 }

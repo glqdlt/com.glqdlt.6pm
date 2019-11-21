@@ -1,6 +1,7 @@
 package com.glqdlt.pm6.webcms.web.app.book;
 
-import com.glqdlt.pm6.webcms.functions.CommaStringListMappers;
+import com.glqdlt.pm6.webcms.web.app.book.model.BookCreateForm;
+import com.glqdlt.pm6.webcms.web.app.book.model.BookUpdateForm;
 import com.glqdlt.pm6.webcms.web.error.book.NotFoundBookError;
 import com.glqdlt.pm6.webcms.web.error.book.NotUniqueBookPropsError;
 import org.springframework.http.HttpHeaders;
@@ -8,9 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Date 2019-11-10
@@ -23,12 +21,6 @@ public class BookRestController {
 
     private BookService bookService;
 
-    private List<String> parsingComma(String str) {
-        if (str == null || str.equals("")) {
-            return new LinkedList<>();
-        }
-        return CommaStringListMappers.STRING_BYPASS.parsing(str);
-    }
 
     public BookRestController(BookService bookService) {
         this.bookService = bookService;
@@ -55,12 +47,10 @@ public class BookRestController {
             @RequestParam String title,
             @RequestParam String authors,
             @RequestParam(required = false) String tags,
-            @RequestParam(required = false) String description) {
-
-        List<String> a = parsingComma(authors);
-        List<String> t = parsingComma(tags);
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false, name = "thumbnailUrl") String thumbnail) {
         try {
-            bookService.updateBook(no, title, a, t, description);
+            bookService.updateBook(new BookUpdateForm(title, authors, tags, description, thumbnail, no));
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.add("location", "/v1/view/book");
             return new ResponseEntity(httpHeaders, HttpStatus.FOUND);
@@ -75,16 +65,14 @@ public class BookRestController {
     @PostMapping(value = "/book/new",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity postBookNew(
-            @RequestParam(required = false) Long no,
             @RequestParam String title,
             @RequestParam String authors,
             @RequestParam(required = false) String tags,
-            @RequestParam(required = false) String description) {
-
-        List<String> a = parsingComma(authors);
-        List<String> t = parsingComma(tags);
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false, name = "thumbnailUrl") String thumbnail
+    ) {
         try {
-            bookService.createNewBook(title, a, t, description);
+            bookService.createNewBook(new BookCreateForm(title, authors, tags, description, thumbnail));
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.add("location", "/v1/view/book");
             return new ResponseEntity(httpHeaders, HttpStatus.FOUND);
