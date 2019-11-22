@@ -9,6 +9,10 @@
         margin-right: 2px;
         background-color: #fff1ea;
     }
+    .pm6-book-thumbnail{
+        width: 100px;
+        height: 100px;
+    }
 </style>
 <div layout:fragment="contentWrapper" class="content-wrapper">
     <section class="content-header">
@@ -90,9 +94,9 @@
             order: [1, 'desc'],
             columns: [
                 {
-                    data: 'thumbnail', render: (d) => {
-                        if (d !== undefined) {
-                            return "<i class='fa fa-eye'></i>";
+                    data: 'thumbnailUrl', render: (d) => {
+                        if (d !== '') {
+                            return "<div><i  data-thumbnail-zone='' class='fa fa-eye'></i><img class='pm6-book-thumbnail' style='display: none' src='" + d + "'/></div>";
                         } else {
                             return "";
                         }
@@ -120,7 +124,21 @@
                             .reduce((acc, x) => acc + x);
                     }
                 }
-            ]
+            ],
+            initComplete: (setting, json) => {
+                const zones = $('[data-thumbnail-zone]');
+
+                zones.on('mouseover', (e) => {
+                    //fixme 리팩토링 필요
+                    const aa = $(e.target);
+                    $(aa.next()[0]).show();
+                });
+                zones.on('mouseout', (e) => {
+                    //fixme 리팩토링 필요
+                    const aa = $(e.target);
+                    $(aa.next()[0]).hide();
+                });
+            }
         });
 
         function makeAnchorButtonPipe(url, text) {
