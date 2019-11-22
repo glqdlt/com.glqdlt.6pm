@@ -9,7 +9,8 @@
         margin-right: 2px;
         background-color: #fff1ea;
     }
-    .pm6-book-thumbnail{
+
+    .pm6-book-thumbnail {
         position: absolute;
         z-index: 999;
         max-width: 300px;
@@ -128,16 +129,17 @@
             ],
             initComplete: (setting, json) => {
                 const zones = $('[data-thumbnail-zone]');
+                const thumbnailToggle = (e) => {
+                    const t = $(e.target);
+                    const imgTag = t.next()[0];
+                    $(imgTag).toggle();
+                };
 
                 zones.on('mouseover', (e) => {
-                    //fixme 리팩토링 필요
-                    const aa = $(e.target);
-                    $(aa.next()[0]).show();
+                    thumbnailToggle(e);
                 });
                 zones.on('mouseout', (e) => {
-                    //fixme 리팩토링 필요
-                    const aa = $(e.target);
-                    $(aa.next()[0]).hide();
+                    thumbnailToggle(e);
                 });
             }
         });
