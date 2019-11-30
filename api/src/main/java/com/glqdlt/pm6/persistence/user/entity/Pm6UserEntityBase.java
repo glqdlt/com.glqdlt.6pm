@@ -5,13 +5,14 @@ import com.glqdlt.pm6.api.model.user.Pm6User;
 
 import javax.persistence.Transient;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Date 2019-11-17
  *
  * @author glqdlt
  */
-public abstract class Pm6UserEntityBase implements Pm6User, EntityModel {
+public abstract class Pm6UserEntityBase implements Pm6User<Pm6GrantEntity>, EntityModel {
     private String userName;
     private String userId;
     private Long userNo;

@@ -1,10 +1,11 @@
 package com.glqdlt.pm6.security;
 
 import com.glqdlt.pm6.api.model.user.Pm6User;
-import org.springframework.security.core.GrantedAuthority;
+import com.glqdlt.pm6.persistence.user.entity.Pm6GrantEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 /**
  * Date 2019-11-17
@@ -13,10 +14,13 @@ import java.util.Collection;
  */
 public class Pm6UserDetail implements UserDetails {
 
-    private Pm6User reference;
+    private Pm6User<Pm6GrantEntity> reference;
+    private Collection<Pm6GrantSpringSecurityBridge> grant;
 
-    public Pm6UserDetail(Pm6User ref) {
+    public Pm6UserDetail(Pm6User<Pm6GrantEntity> ref) {
         this.reference = ref;
+        this.grant = ref.getGrant().stream().map(Pm6GrantSpringSecurityBridge::new)
+                .collect(Collectors.toList());
     }
 
     public Pm6User getReference() {
@@ -24,8 +28,8 @@ public class Pm6UserDetail implements UserDetails {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public Collection<Pm6GrantSpringSecurityBridge> getAuthorities() {
+        return grant;
     }
 
     @Override
