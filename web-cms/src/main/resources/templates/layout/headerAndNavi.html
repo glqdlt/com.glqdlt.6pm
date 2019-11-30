@@ -6,7 +6,7 @@
         <meta charset="UTF-8">
         <title layout:fragment="title">Title</title>
         <link rel="stylesheet" href="/webjars/adminlte/2.3.11/bootstrap/css/bootstrap.min.css"/>
-        <link rel="stylesheet" href="/webjars/adminlte/2.3.11/dist/css/AdminLTE.min.css"/>
+        <link rel="stylesheet" th:href="@{/webjars/adminlte/2.3.11/dist/css/AdminLTE.min.css}"/>
         <link rel="stylesheet" href="/webjars/adminlte/2.3.11/dist/css/skins/_all-skins.css"/>
         <link rel="stylesheet" href="/webjars/font-awesome/4.7.0/css/font-awesome.css"/>
         <th:block layout:fragment="customLink">
@@ -194,14 +194,14 @@
                             <!-- User Account: style can be found in dropdown.less -->
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="/img/default-user.png" class="user-image"
+                                    <img src="/static/img/default-user.png" class="user-image"
                                          alt="User Image">
                                     <span class="hidden-xs">TestUser</span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="/img/default-user.png" class="img-circle"
+                                        <img src="/static/img/default-user.png" class="img-circle"
                                              alt="User Image">
 
                                         <p>
