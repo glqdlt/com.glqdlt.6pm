@@ -9,6 +9,12 @@
         margin-right: 2px;
         background-color: #fff1ea;
     }
+
+    .pm6-book-thumbnail {
+        position: absolute;
+        z-index: 999;
+        max-width: 300px;
+    }
 </style>
 <div layout:fragment="contentWrapper" class="content-wrapper">
     <section class="content-header">
@@ -90,9 +96,9 @@
             order: [1, 'desc'],
             columns: [
                 {
-                    data: 'thumbnail', render: (d) => {
-                        if (d !== undefined) {
-                            return "<i class='fa fa-eye'></i>";
+                    data: 'thumbnailUrl', render: (d) => {
+                        if (d !== '') {
+                            return "<div><i  data-thumbnail-zone='' class='fa fa-eye'></i><img class='pm6-book-thumbnail' style='display: none' src='" + d + "'/></div>";
                         } else {
                             return "";
                         }
@@ -120,7 +126,22 @@
                             .reduce((acc, x) => acc + x);
                     }
                 }
-            ]
+            ],
+            initComplete: (setting, json) => {
+                const zones = $('[data-thumbnail-zone]');
+                const thumbnailToggle = (e) => {
+                    const t = $(e.target);
+                    const imgTag = t.next()[0];
+                    $(imgTag).toggle();
+                };
+
+                zones.on('mouseover', (e) => {
+                    thumbnailToggle(e);
+                });
+                zones.on('mouseout', (e) => {
+                    thumbnailToggle(e);
+                });
+            }
         });
 
         function makeAnchorButtonPipe(url, text) {

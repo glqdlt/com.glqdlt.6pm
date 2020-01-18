@@ -15,6 +15,13 @@ import java.util.List;
 @Entity
 @Table(name = "tb_book")
 public class Pm6BookEntity extends Pm6BookEntityBase<Pm6TagEntity, Pm6AuthorEntity> {
+
+    @Column(name = "thumbnail")
+    @Override
+    public String getThumbnailUrl() {
+        return super.getThumbnailUrl();
+    }
+
     @Override
     public LocalDateTime getRegDate() {
         return super.getRegDate();
