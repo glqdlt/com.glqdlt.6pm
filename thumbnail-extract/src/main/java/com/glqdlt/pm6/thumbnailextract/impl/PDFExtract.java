@@ -21,8 +21,9 @@ import java.util.Random;
 
 /**
  * Date 2019-11-10
- * <p>
- * PDF 내용 첫장을 추출하려했는 데, 사실상 현재 하는 것은 pdf 내용을 캡처링 하는 것과 동일하다.
+ *
+ * 압축 파일 처럼 첫번째 이미지에 해당하는 걸 추출하려 했으나,
+ * 사실상 pdf 첫장을 캡처링 하는 것과 동일한 개념.
  *
  * @author glqdlt
  * @see <a href='https://www.baeldung.com/java-pdf-creation'>https://www.baeldung.com/java-pdf-creation</a>
