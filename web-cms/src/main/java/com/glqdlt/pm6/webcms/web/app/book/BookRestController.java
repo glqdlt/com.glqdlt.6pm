@@ -1,6 +1,7 @@
 package com.glqdlt.pm6.webcms.web.app.book;
 
 import com.glqdlt.pm6.webcms.functions.CommaStringListMappers;
+import com.glqdlt.pm6.webcms.web.error.book.NotFoundBookError;
 import com.glqdlt.pm6.webcms.web.error.book.NotUniqueBookPropsError;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -33,9 +34,48 @@ public class BookRestController {
         this.bookService = bookService;
     }
 
+    @PostMapping(value = "/book/{id}/delete")
+    public ResponseEntity postBookDelete(@PathVariable(value = "id") Long bookNo) {
+
+        try {
+            bookService.deleteBook(bookNo);
+            return ResponseEntity.status(200).build();
+        } catch (NotFoundBookError notFoundBookError) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(notFoundBookError.getMessage());
+        }
+
+
+    }
+
+    @PostMapping(value = "/book/{no}/edit",
+            consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
+    public ResponseEntity postUpdateBook(
+            @PathVariable Long no,
+            @RequestParam String title,
+            @RequestParam String authors,
+            @RequestParam(required = false) String tags,
+            @RequestParam(required = false) String description) {
+
+        List<String> a = parsingComma(authors);
+        List<String> t = parsingComma(tags);
+        try {
+            bookService.updateBook(no, title, a, t, description);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.add("location", "/v1/view/book");
+            return new ResponseEntity(httpHeaders, HttpStatus.FOUND);
+        } catch (
+                NotUniqueBookPropsError e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
+    }
+
+
     @PostMapping(value = "/book/new",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE, MediaType.APPLICATION_FORM_URLENCODED_VALUE})
     public ResponseEntity postBookNew(
+            @RequestParam(required = false) Long no,
             @RequestParam String title,
             @RequestParam String authors,
             @RequestParam(required = false) String tags,
@@ -48,7 +88,8 @@ public class BookRestController {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.add("location", "/v1/view/book");
             return new ResponseEntity(httpHeaders, HttpStatus.FOUND);
-        } catch (NotUniqueBookPropsError e) {
+        } catch (
+                NotUniqueBookPropsError e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(e.getMessage());
         }

@@ -2,16 +2,16 @@
       layout:decorate="~{layout/headerAndNavi}">
 <title layout:fragment="title">Book Management</title>
 <th:block layout:fragment="customLink">
-    <link rel="stylesheet" href="/static/bender/jquery/plugins/tag-it/css/jquery.tagit.css">
-    <link rel="stylesheet" href="/static/bender/jquery/plugins/tag-it/css/tagit.ui-zendesk.css">
+    <link rel="stylesheet" href="/bender/jquery/plugins/tag-it/css/jquery.tagit.css">
+    <link rel="stylesheet" href="/bender/jquery/plugins/tag-it/css/tagit.ui-zendesk.css">
     <link rel="stylesheet" href="/webjars/jquery-ui/1.12.1/jquery-ui.css">
 </th:block>
 
 <div layout:fragment="contentWrapper" class="content-wrapper">
     <section class="content-header">
         <h1>
-            New BOOK
-            <small>edit new book data</small>
+            Edit BOOK
+            <small>edit book data</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -36,32 +36,35 @@
                     <!-- /.box-header -->
 
                     <div class="box-body">
-                        <form id="book-form" role="form" action="/v1/api/book/new" method="post">
+                        <form id="book-form" role="form" th:action="${book.getLocation()}" method="post">
                             <div class="col-md-7">
                                 <div class="form-group">
+                                    <input name="no" th:value="${book.getBook().getNo()}" type="hidden"/>
+                                </div>
+                                <div class="form-group">
                                     <label for="book-title">Title</label>
-                                    <input name="title" type="text" class="form-control" id="book-title">
+                                    <input name="title" th:value="${book.getBook().getTitle()}" type="text" class="form-control" id="book-title">
                                 </div>
                                 <div class="form-group">
                                     <label for="book-author">Author</label>
                                     <p>
                                         <small>작가의 이름을 입력합니다.</small>
                                     </p>
-                                    <input name="authors" type="text" class="form-control" id="book-author">
+                                    <input th:value="${book.getAuthors()}" name="authors" type="text" class="form-control" id="book-author">
                                 </div>
                                 <div class="form-group">
                                     <label for="book-tag">Tag (Option)</label>
                                     <p>
                                         <small>태그를 입력합니다.</small>
                                     </p>
-                                    <input name="tags" type="text" class="form-control" id="book-tag">
+                                    <input th:value="${book.getTags()}" name="tags" type="text" class="form-control" id="book-tag">
                                 </div>
                                 <div class="form-group">
                                     <label>Description (Option)</label>
                                     <p>
                                         <small>간단한 설명을 남길 수 있습니다.</small>
                                     </p>
-                                    <textarea name="description" class="form-control" rows="3"></textarea>
+                                    <textarea th:value="${book.getBook().getDescription()}" name="description" class="form-control" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile"><del>Book Upload (Option)</del></label>
@@ -142,7 +145,7 @@
 
 <th:block layout:fragment="customScript">
     <script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="/static/bender/jquery/plugins/tag-it/js/tag-it.min.js"></script>
+    <script src="/bender/jquery/plugins/tag-it/js/tag-it.min.js"></script>
 
     <script type="text/javascript">
         'use strict';
@@ -214,7 +217,6 @@
         });
 
 
-        //@see https://github.com/aehlke/tag-it/blob/master/README.markdown
         const tagItInit = (author, tag) => {
             $("#book-author").tagit({
                 availableTags: author,
