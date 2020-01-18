@@ -68,9 +68,6 @@
                 "<span class='chat-bar-message'>" + msg + "</span></div>"
         }
 
-        $("#send-chat").click(function () {
-            sendMessage();
-        });
     </script>
 
 </th:block>
@@ -465,6 +462,12 @@
 
             </div>
         </div>
+        <script>
+            const chatBtn = document.getElementById('send-chat');
+            chatBtn.addEventListener('click',(e) => {
+                sendMessage();
+            })
+        </script>
     </section>
     <!-- /.content -->
 </div>
