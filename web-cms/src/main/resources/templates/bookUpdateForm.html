@@ -28,9 +28,13 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Edit FORM</h3>
                         <div class="pull-right">
-                            <a href="/v1/view/book">
-                                <button type="button" class="btn btn-block btn-primary btn-sm"><i class="fa fa-history"></i> Book Contents</button>
-                            </a>
+                            <div>
+                                <a href="/v1/view/book">
+                                    <button type="button" class="btn btn-block btn-primary btn-sm"><i
+                                            class="fa fa-history"></i> Book Contents
+                                    </button>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <!-- /.box-header -->
@@ -43,31 +47,37 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="book-title">Title</label>
-                                    <input name="title" th:value="${book.getBook().getTitle()}" type="text" class="form-control" id="book-title">
+                                    <input name="title" th:value="${book.getBook().getTitle()}" type="text"
+                                           class="form-control" id="book-title">
                                 </div>
                                 <div class="form-group">
                                     <label for="book-author">Author</label>
                                     <p>
                                         <small>작가의 이름을 입력합니다.</small>
                                     </p>
-                                    <input th:value="${book.getAuthors()}" name="authors" type="text" class="form-control" id="book-author">
+                                    <input th:value="${book.getAuthors()}" name="authors" type="text"
+                                           class="form-control" id="book-author">
                                 </div>
                                 <div class="form-group">
                                     <label for="book-tag">Tag (Option)</label>
                                     <p>
                                         <small>태그를 입력합니다.</small>
                                     </p>
-                                    <input th:value="${book.getTags()}" name="tags" type="text" class="form-control" id="book-tag">
+                                    <input th:value="${book.getTags()}" name="tags" type="text" class="form-control"
+                                           id="book-tag">
                                 </div>
                                 <div class="form-group">
                                     <label>Description (Option)</label>
                                     <p>
                                         <small>간단한 설명을 남길 수 있습니다.</small>
                                     </p>
-                                    <textarea th:value="${book.getBook().getDescription()}" name="description" class="form-control" rows="3"></textarea>
+                                    <textarea th:value="${book.getBook().getDescription()}" name="description"
+                                              class="form-control" rows="3"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputFile"><del>Book Upload (Option)</del></label>
+                                    <label for="exampleInputFile">
+                                        <del>Book Upload (Option)</del>
+                                    </label>
                                     <div>
                                         <p>
                                             <small>전자책을 업로드 합니다. 지원하는 포맷은 pdf, zip 입니다.</small>
@@ -99,7 +109,9 @@
                                                   value="url">URL</label>
                                     <label><input type="radio" name="thumbnailManual"
                                                   data-show-zone-id="thumbnail-self-upload-zone"
-                                                  value="upload"><del>Upload</del></label>
+                                                  value="upload">
+                                        <del>Upload</del>
+                                    </label>
                                 </div>
                             </div>
 
@@ -116,7 +128,8 @@
                             </div>
 
 
-                            <img id="thumbnail-preview" class="col-lg-10 col-md-12 col-xs-12" th:src="${book.getBook().getThumbnailUrl()}"
+                            <img id="thumbnail-preview" class="col-lg-10 col-md-12 col-xs-12"
+                                 th:src="${book.getBook().getThumbnailUrl()}"
                                  src="">
                         </div>
                     </div>
@@ -127,6 +140,12 @@
                             <button onclick="submitForm('book-form')" class="col-md-7 col-xs-6 btn btn-primary">Submit
                             </button>
                             <button onclick="resetForm('book-form')" class="col-md-5 col-xs-6 btn btn-default">Reset
+                            </button>
+                        </div>
+                        <div class="col-md5">
+                            <button th:attr="onclick=|deleteBook(${book.getBook().getNo()},'${book.getBook().getTitle()}')|" type="button"
+                                    class="btn btn-danger"><i
+                                    class="fa fa-remove"></i>Delete this item
                             </button>
                         </div>
 
@@ -149,6 +168,29 @@
 
     <script type="text/javascript">
         'use strict';
+
+        function deleteBook(bookId, bookTitle) {
+            if (!bookId) {
+                throw new Error('book id is null');
+            }
+            if (Number.isNaN(bookId)) {
+                throw new Error('book id is must number');
+            }
+            confirm('are you sure delete item ?' + bookTitle)
+            {
+                $.ajax({
+                    url: '/v1/api/book/' + bookId + '/delete',
+                    method: 'post',
+                    success : () => {
+                        window.location = '/v1/view/book';
+                    },
+                    error : (e) => {
+                        alert(e);
+                        window.location = '/v1/view/book';
+                    }
+                })
+            }
+        }
 
         function submitForm(id) {
             $(document.getElementById(id))[0].submit();
@@ -221,13 +263,13 @@
             $("#book-author").tagit({
                 availableTags: author,
                 allowSpaces: true,
-                showAutocompleteOnFocus : true,
+                showAutocompleteOnFocus: true,
                 singleField: true
             });
             $("#book-tag").tagit({
                 availableTags: tag,
                 allowSpaces: true,
-                showAutocompleteOnFocus : true,
+                showAutocompleteOnFocus: true,
                 singleField: true
             });
         };
