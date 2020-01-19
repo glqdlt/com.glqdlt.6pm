@@ -3,6 +3,8 @@ package com.glqdlt.pm6.api.model.book;
 import java.time.LocalDateTime;
 
 public abstract class BookReview {
+//    TODO 별 점을 기본으로 ?
+//    private Integer star;
     private String title;
     private String targetBookTitle;
     private String writeUrl;
