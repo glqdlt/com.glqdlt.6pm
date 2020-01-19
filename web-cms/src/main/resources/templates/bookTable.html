@@ -93,11 +93,12 @@
                 method: 'get',
                 dataSrc: ""
             },
+            lengthMenu: [ [100, -1], [100, "All"] ],
             order: [1, 'desc'],
             columns: [
                 {
                     data: 'thumbnailUrl', render: (d) => {
-                        if (d !== '') {
+                        if (d) {
                             return "<div><i  data-thumbnail-zone='' class='fa fa-eye'></i><img class='pm6-book-thumbnail' style='display: none' src='" + d + "'/></div>";
                         } else {
                             return "";
@@ -113,17 +114,24 @@
                 },
                 {
                     data: (x) => {
-                        return x.authors
-                            .map(x => makeAnchorButtonPipe('#', x.name))
-                            .reduce((acc, x) => acc + x);
+                        if (x.authors.length > 0) {
+                            return x.authors
+                                .map(x => makeAnchorButtonPipe('#', x.name))
+                                .reduce((acc, x) => acc + x);
+                        }
+                        return '';
                     }
                 },
                 {data: 'regDateFormatString'},
                 {
                     data: (x) => {
-                        return x.tags
-                            .map(x => makeAnchorButtonPipe('#', x.name))
-                            .reduce((acc, x) => acc + x);
+                        if (x.tags.length > 0) {
+                            return x.tags
+                                .map(x => makeAnchorButtonPipe('#', x.name))
+                                .reduce((acc, x) => acc + x);
+                        }
+                        return '';
+
                     }
                 }
             ],
