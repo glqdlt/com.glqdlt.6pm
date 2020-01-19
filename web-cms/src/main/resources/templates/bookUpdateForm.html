@@ -91,6 +91,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label for="exampleInputFile">
+                                        Book Reviews
+                                    </label>
+                                    <p>등록 된 북리뷰 갯수 : <span>5</span>건</p>
+                                </div>
+                                <div class="form-group">
                                     <input type="hidden" name="thumbnailUrl">
                                 </div>
 
@@ -155,7 +161,8 @@
                             </button>
                         </div>
                         <div class="col-md5">
-                            <button th:attr="onclick=|deleteBook(${book.getBook().getNo()},'${book.getBook().getTitle()}')|" type="button"
+                            <button th:attr="onclick=|deleteBook(${book.getBook().getNo()},'${book.getBook().getTitle()}')|"
+                                    type="button"
                                     class="btn btn-danger"><i
                                     class="fa fa-remove"></i>Delete this item
                             </button>
@@ -193,10 +200,10 @@
                 $.ajax({
                     url: '/v1/api/book/' + bookId + '/delete',
                     method: 'post',
-                    success : () => {
+                    success: () => {
                         window.location = '/v1/view/book';
                     },
-                    error : (e) => {
+                    error: (e) => {
                         alert(e);
                         window.location = '/v1/view/book';
                     }
