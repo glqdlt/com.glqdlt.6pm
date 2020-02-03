@@ -1,0 +1,60 @@
+@startuml
+
+'class CommonRequestDto{
+'    -fromDay : Date
+'    -toDay : Date
+'    -searchType : Integer
+'    -searchValue : String
+'    -enable : Boolean
+'
+'}
+'
+'
+'CommonRequestDto <-- UserDetailService
+'CommonRequestDto <-- UserEventLogService
+
+
+interface FromToAble{
+    +getFromDateTime : LocalDateTime
+    +getToDateTime : LocalDateTime
+}
+
+Enum SearchType{
+    -UserDetail
+    -UserEvent
+}
+
+class NewRequest<T extends Object>{
+    -searchValue : T
+    +{abstract}getSearchType() : SearchType
+}
+
+class NewUserDetailRequest extends NewRequest{
+    -searchValue : Integer
+    -searchUserNo : Integer
+    -enable : Boolean
+    +getSearchType() : UserDetail
+}
+
+class NewUserEventRequest extends NewRequest implements FromToAble{
+    -searchValue : String
+    -searchEventTitle : String
+    -fromDateTime : LocalDateTime
+    -toDateTile : LocalDateTime
+    +getSearchType() : UserEvent
+}
+
+class ServerEventRequest implements FromToAble{
+    -eventName : String
+    -fromDateTime : LocalDateTime
+    -toDateTile : LocalDateTime
+}
+
+
+SearchType <-- NewRequest
+NewUserDetailRequest <-- UserDetailService
+NewUserEventRequest <-- UserEventLogService
+
+
+
+@enduml
