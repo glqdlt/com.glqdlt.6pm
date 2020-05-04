@@ -1,1 +1,0 @@
-java -Dspring.profiles.active=prod -jar web-cms-0.0.1-SNAPSHOT.jar

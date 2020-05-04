@@ -19,14 +19,14 @@
         </developer>
     </developers>
 
-    <groupId>com.glqdlt.pm6</groupId>
-    <artifactId>web-service</artifactId>
+    <groupId>com.glqdlt.pm6.web</groupId>
+    <artifactId>web</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
         <module>cms</module>
-        <module>jpa-persistence</module>
+        <module>persistence</module>
     </modules>
     <dependencies>
 
