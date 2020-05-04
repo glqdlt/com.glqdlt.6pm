@@ -18,9 +18,9 @@
 
     실제 프로젝트의 웹 어플리케이션
 
-- commons
+- thumbnail-extract
 
-    이것저것 유틸성 컴포넌트
+    책 표지 썸네일 추출 관련
     
 
 ### Getting Started
