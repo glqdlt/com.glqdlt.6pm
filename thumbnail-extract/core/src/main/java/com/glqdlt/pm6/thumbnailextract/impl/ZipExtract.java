@@ -22,8 +22,9 @@ import java.util.zip.ZipFile;
 
 /**
  * Date 2019-11-10
- *
+ * <p>
  * 압축 파일의 내부 엔트리 중에 가장 첫번째 이미지를 추출하는 개념.
+ *
  * @author glqdlt
  */
 public class ZipExtract implements ExtractUtil {
@@ -67,6 +68,10 @@ public class ZipExtract implements ExtractUtil {
             return s;
         });
         futures.add(future);
+    }
+
+    public String[] extract(File input) throws IOException {
+        return extract(input, input.getAbsoluteFile());
     }
 
     @Override
