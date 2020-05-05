@@ -18,9 +18,9 @@
 
     실제 프로젝트의 웹 어플리케이션
 
-- thumbnail-extract
+- thumbnail-extract(deprecated)
 
-    책 표지 썸네일 추출 관련
+    이 프로젝트는 [glqdlt/thumbnail-extarct](https://github.com/glqdlt/thumnail-extract) 로 이동되었습니다.
     
 
 ### Getting Started
