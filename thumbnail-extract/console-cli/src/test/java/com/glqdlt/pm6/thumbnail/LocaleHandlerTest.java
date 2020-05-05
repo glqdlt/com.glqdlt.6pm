@@ -33,5 +33,11 @@ public class LocaleHandlerTest {
         Assert.assertEquals(LocaleHandler.SupportLocale.ENGLISH, a);
     }
 
-
+    @Test
+    public void localeMessage() {
+        Locale.setDefault(new Locale("en"));
+        LocaleHandler localeHandler = new LocaleHandler();
+        String msg = localeHandler.getMessage(LocaleHandler.MessageKey.WELCOME_MESSAGE);
+        Assert.assertEquals("Welcome, Iam 'CLI console'.", msg);
+    }
 }

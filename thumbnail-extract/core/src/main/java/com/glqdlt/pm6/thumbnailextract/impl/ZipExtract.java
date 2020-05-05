@@ -60,7 +60,7 @@ public class ZipExtract implements ExtractUtil {
                     d = outputDir.getPath();
                 }
                 final Path
-                        out = new File(d + "_" + firstItem.getName()).toPath();
+                        out = new File(d + File.separator + targetSource.getName() + "_" + firstItem.getName()).toPath();
                 Files.copy(stream, out, StandardCopyOption.REPLACE_EXISTING);
                 s = out.toString();
             }
@@ -111,8 +111,12 @@ public class ZipExtract implements ExtractUtil {
             }
 
         }
-
+        close();
         return result.toArray(new String[0]);
+    }
+
+    public void close() {
+        this.executorService.shutdown();
     }
 
     @Override

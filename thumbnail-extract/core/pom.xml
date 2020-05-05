@@ -8,7 +8,7 @@
     <parent>
         <groupId>com.glqdlt.pm6.thumbnail</groupId>
         <artifactId>thumbnail-extract</artifactId>
-        <version>jdk8-0.0.1-SNAPSHOT</version>
+        <version>JDK8.0.0.2-SNAPSHOT</version>
     </parent>
 
     <dependencies>
